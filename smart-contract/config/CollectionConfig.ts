@@ -9,10 +9,10 @@ const CollectionConfig: CollectionConfigInterface = {
   // The contract name can be updated using the following command:
   // yarn rename-contract NEW_CONTRACT_NAME
   // Please DO NOT change it manually!
-  contractName: 'YourNftToken',
-  tokenName: 'My NFT Token',
-  tokenSymbol: 'MNT',
-  hiddenMetadataUri: 'ipfs://__CID__/hidden.json',
+  contractName: 'FryHeadsNft',
+  tokenName: 'Fry Heads NFT',
+  tokenSymbol: 'FRH',
+  hiddenMetadataUri: 'ipfs://QmUSeZpsQHVV5gBj5q4rAQ3viDFSakTVXcuc3dq6X9Z8cH/hidden.json',
   maxSupply: 10000,
   whitelistSale: {
     price: 0.05,
@@ -26,8 +26,8 @@ const CollectionConfig: CollectionConfigInterface = {
     price: 0.09,
     maxMintAmountPerTx: 5,
   },
-  contractAddress: null,
-  marketplaceIdentifier: 'my-nft-token',
+  contractAddress: "0x25D586F047fB9B8347280152E173647d8A9cE9A4",
+  marketplaceIdentifier: 'fry-heads-token',
   marketplaceConfig: Marketplaces.openSea,
   whitelistAddresses,
 };
