@@ -68,7 +68,7 @@ export default class MintWidget extends React.Component<Props, State> {
             <div className="preview">
               <img src="/build/images/preview.png" alt="Collection preview" />
             </div>
-
+          
             <div className="price">
               <strong>Total price:</strong> {utils.formatEther(this.props.tokenPrice.mul(this.state.mintAmount))} {this.props.networkConfig.symbol}
             </div>
