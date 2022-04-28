@@ -196,6 +196,25 @@
       }
     }
 
+    .charity-select {
+      .charity-label {
+        @apply bg-charity_label;
+        @apply p-3;
+
+        @apply font-semibold;
+        @apply text-white_label;
+      }
+
+      .charity-grid-container {
+        @apply grid sm:grid-cols-3;
+
+        .charity-grid-item {
+          @apply p-2 m-2;
+          @apply bg-charity_color;
+        }
+      }
+    }
+
     .controls {
       @apply flex items-stretch;
 

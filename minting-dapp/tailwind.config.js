@@ -78,7 +78,10 @@ module.exports = {
         },
 
         // Mint widget
-        token_preview: "#046eff",
+        token_preview: "#ffffff",
+        charity_label: "#046eff",
+        white_label: "#ffffff",
+        charity_color: "#cacaca",
       },
     },
   },

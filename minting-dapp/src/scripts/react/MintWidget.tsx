@@ -73,6 +73,18 @@ export default class MintWidget extends React.Component<Props, State> {
               <strong>Total price:</strong> {utils.formatEther(this.props.tokenPrice.mul(this.state.mintAmount))} {this.props.networkConfig.symbol}
             </div>
 
+            <div className="charity-select">
+              <div className="charity-label">20% of the price will be sent to the charity of your choice</div>
+              <div className="charity-grid-container">
+                <div className="charity-grid-item">Unicef</div>
+                <div className="charity-grid-item">Red Cross</div>
+                <div className="charity-grid-item">Save the Children</div>
+                <div className="charity-grid-item">Save the Planet</div>
+                <div className="charity-grid-item">Ocean Cleanup</div>
+                <div className="charity-grid-item">Greenpeace</div>
+              </div>
+            </div>
+
             <div className="controls">
               <button className="decrease" onClick={() => this.decrementMintAmount()}>-</button>
               <span className="mint-amount">{this.state.mintAmount}</span>
