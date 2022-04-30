@@ -11,16 +11,18 @@ interface Props {
   isPaused: boolean;
   isWhitelistMintEnabled: boolean;
   isUserInWhitelist: boolean;
-  mintTokens(mintAmount: number): Promise<void>;
-  whitelistMintTokens(mintAmount: number): Promise<void>;
+  mintTokens(mintAmount: number, charityId: number): Promise<void>;
+  whitelistMintTokens(mintAmount: number, charityId: number): Promise<void>;
 }
 
 interface State {
   mintAmount: number;
+  charityId: number;
 }
 
 const defaultState: State = {
   mintAmount: 1,
+  charityId: -1
 };
 
 export default class MintWidget extends React.Component<Props, State> {
@@ -50,14 +52,25 @@ export default class MintWidget extends React.Component<Props, State> {
     });
   }
 
+  private selectCharity(id: number): void {
+    this.setState({
+      charityId: id
+    });
+  }
+
   private async mint(): Promise<void> {
+    if (this.state.charityId == -1) {
+      alert("Please select the charity you want to give to");
+      return;
+    }
+
     if (!this.props.isPaused) {
-      await this.props.mintTokens(this.state.mintAmount);
+      await this.props.mintTokens(this.state.mintAmount, this.state.charityId);
 
       return;
     }
 
-    await this.props.whitelistMintTokens(this.state.mintAmount);
+    await this.props.whitelistMintTokens(this.state.mintAmount, this.state.charityId);
   }
 
   render() {
@@ -76,12 +89,18 @@ export default class MintWidget extends React.Component<Props, State> {
             <div className="charity-select">
               <div className="charity-label">20% of the price will be sent to the charity of your choice</div>
               <div className="charity-grid-container">
-                <div className="charity-grid-item">Unicef</div>
-                <div className="charity-grid-item">Red Cross</div>
-                <div className="charity-grid-item">Save the Children</div>
-                <div className="charity-grid-item">Save the Planet</div>
-                <div className="charity-grid-item">Ocean Cleanup</div>
-                <div className="charity-grid-item">Greenpeace</div>
+                <button className={"charity-grid-item " + (this.state.charityId==0 ? "charity-selected" : null)}
+                     onClick={() => this.selectCharity(0)}>Unicef</button>
+                <button className={"charity-grid-item " + (this.state.charityId==1 ? "charity-selected" : null)}
+                     onClick={() => this.selectCharity(1)}>Red Cross</button>
+                <button className={"charity-grid-item " + (this.state.charityId==2 ? "charity-selected" : null)}
+                     onClick={() => this.selectCharity(2)}>Save the Children</button>
+                <button className={"charity-grid-item " + (this.state.charityId==3 ? "charity-selected" : null)}
+                     onClick={() => this.selectCharity(3)}>Save the Planet</button>
+                <button className={"charity-grid-item " + (this.state.charityId==4 ? "charity-selected" : null)}
+                     onClick={() => this.selectCharity(4)}>Ocean Cleanup</button>
+                <button className={"charity-grid-item " + (this.state.charityId==5 ? "charity-selected" : null)}
+                     onClick={() => this.selectCharity(5)}>Greenpeace</button>
               </div>
             </div>
 

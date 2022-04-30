@@ -26,6 +26,13 @@ contract FryHeadsNft is ERC721A, Ownable, ReentrancyGuard {
   bool public whitelistMintEnabled = false;
   bool public revealed = false;
 
+  struct charity {
+    string name;
+    address addr;
+    uint256 count;
+  }
+  mapping(uint256 => charity) public charities;
+
   constructor(
     string memory _tokenName,
     string memory _tokenSymbol,
@@ -38,6 +45,7 @@ contract FryHeadsNft is ERC721A, Ownable, ReentrancyGuard {
     maxSupply = _maxSupply;
     setMaxMintAmountPerTx(_maxMintAmountPerTx);
     setHiddenMetadataUri(_hiddenMetadataUri);
+    initCharities();
   }
 
   modifier mintCompliance(uint256 _mintAmount) {
@@ -51,7 +59,40 @@ contract FryHeadsNft is ERC721A, Ownable, ReentrancyGuard {
     _;
   }
 
-  function whitelistMint(uint256 _mintAmount, bytes32[] calldata _merkleProof) public payable mintCompliance(_mintAmount) mintPriceCompliance(_mintAmount) {
+  function initCharities() public onlyOwner {
+    charities[0] = charity({
+      name: "wallet 2",
+      addr: "0x95Bb8d2D7dac1B1c125877B22Dfd29B69d951c51",
+      count: 0
+    });
+    charities[1] = charity({
+      name: "wallet 3",
+      addr: "0x886206B3c8E3D877755E16d013412C1686827133",
+      count: 0
+    });
+    charities[2] = charity({
+      name: "wallet 2",
+      addr: "0x95Bb8d2D7dac1B1c125877B22Dfd29B69d951c51",
+      count: 0
+    });
+    charities[3] = charity({
+      name: "wallet 3",
+      addr: "0x886206B3c8E3D877755E16d013412C1686827133",
+      count: 0
+    });
+    charities[4] = charity({
+      name: "wallet 2",
+      addr: "0x95Bb8d2D7dac1B1c125877B22Dfd29B69d951c51",
+      count: 0
+    });
+    charities[5] = charity({
+      name: "wallet 3",
+      addr: "0x886206B3c8E3D877755E16d013412C1686827133",
+      count: 0
+    });
+  }
+
+  function whitelistMint(uint256 _mintAmount, uint256 _charityId, bytes32[] calldata _merkleProof) public payable mintCompliance(_mintAmount) mintPriceCompliance(_mintAmount) {
     // Verify whitelist requirements
     require(whitelistMintEnabled, 'The whitelist sale is not enabled!');
     require(!whitelistClaimed[_msgSender()], 'Address already claimed!');
@@ -59,12 +100,14 @@ contract FryHeadsNft is ERC721A, Ownable, ReentrancyGuard {
     require(MerkleProof.verify(_merkleProof, merkleRoot, leaf), 'Invalid proof!');
 
     whitelistClaimed[_msgSender()] = true;
+    charities[_charityId].count += 1;
     _safeMint(_msgSender(), _mintAmount);
   }
 
-  function mint(uint256 _mintAmount) public payable mintCompliance(_mintAmount) mintPriceCompliance(_mintAmount) {
+  function mint(uint256 _mintAmount, uint256 _charityId) public payable mintCompliance(_mintAmount) mintPriceCompliance(_mintAmount) {
     require(!paused, 'The contract is paused!');
 
+    charities[_charityId].count += 1;
     _safeMint(_msgSender(), _mintAmount);
   }
   

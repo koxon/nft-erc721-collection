@@ -94,6 +94,10 @@ button {
     @apply border-btn-hover_border;
   }
 
+  &.charity-grid-item {
+    @apply rounded-md;
+  }
+
   &.primary {
     @apply text-btn_primary-txt;
     @apply bg-btn_primary-bg;

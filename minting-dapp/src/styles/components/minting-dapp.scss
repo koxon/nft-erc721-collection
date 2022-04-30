@@ -197,20 +197,30 @@
     }
 
     .charity-select {
+
       .charity-label {
-        @apply bg-charity_label;
-        @apply p-3;
+        @apply bg-warning-bg;
+        @apply p-3 mb-2;
 
         @apply font-semibold;
-        @apply text-white_label;
       }
 
       .charity-grid-container {
-        @apply grid sm:grid-cols-3;
+        @apply grid sm:grid-cols-2 auto-rows-min;
+        @apply pr-2;
 
-        .charity-grid-item {
-          @apply p-2 m-2;
+        & > * {
+          @apply flex flex-col items-center gap-6;
+          @apply p-2 mb-2 ml-2;
           @apply bg-charity_color;
+    
+          .label {
+            @apply text-xs text-label;
+          }
+        }
+
+        .charity-selected {
+          @apply bg-charity_selected_color;
         }
       }
     }

@@ -81,7 +81,7 @@ export default class Dapp extends React.Component<Props, State> {
     await this.initWallet();
   }
 
-  async mintTokens(amount: number): Promise<void>
+  async mintTokens(amount: number, charityId: number): Promise<void>
   {
     try {
       await this.contract.mint(amount, {value: this.state.tokenPrice.mul(amount)});
@@ -90,10 +90,10 @@ export default class Dapp extends React.Component<Props, State> {
     }
   }
 
-  async whitelistMintTokens(amount: number): Promise<void>
+  async whitelistMintTokens(amount: number, charityId: number): Promise<void>
   {
     try {
-      await this.contract.whitelistMint(amount, Whitelist.getProofForAddress(this.state.userAddress!), {value: this.state.tokenPrice.mul(amount)});
+      await this.contract.whitelistMint(amount, Whitelist.getProofForAddress(this.state.userAddress!), {value: this.state.tokenPrice.mul(amount)}, );
     } catch (e) {
       this.setError(e);
     }
@@ -176,8 +176,8 @@ export default class Dapp extends React.Component<Props, State> {
                     isPaused={this.state.isPaused}
                     isWhitelistMintEnabled={this.state.isWhitelistMintEnabled}
                     isUserInWhitelist={this.state.isUserInWhitelist}
-                    mintTokens={(mintAmount) => this.mintTokens(mintAmount)}
-                    whitelistMintTokens={(mintAmount) => this.whitelistMintTokens(mintAmount)}
+                    mintTokens={(mintAmount, charityId) => this.mintTokens(mintAmount, charityId)}
+                    whitelistMintTokens={(mintAmount, charityId) => this.whitelistMintTokens(mintAmount, charityId)}
                   />
                   :
                   <div className="collection-sold-out">
