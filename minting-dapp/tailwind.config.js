@@ -46,12 +46,12 @@ module.exports = {
           hover_border: colors.slate[200],
         },
         btn_primary: {
-          txt: colors.white,
-          bg: "#046eff",
-          border: "#046eff",
-          hover_txt: colors.white,
-          hover_bg: "#529bff",
-          hover_border: "#529bff",
+          txt: colors.black,
+          bg: "#fbd229",
+          border: "#fbd229",
+          hover_txt: colors.black,
+          hover_bg: "#ffde54",
+          hover_border: "#ffde54",
         },
         btn_error: {
           txt: colors.white,
@@ -61,14 +61,14 @@ module.exports = {
           hover_bg: colors.red[600],
           hover_border: colors.red[600],
         },
-        label: "#046eff",
+        label: "#fa0601",
         txt_input: {
-          txt: "#046eff",
+          txt: "#fa0601",
           bg: colors.white,
           border: colors.slate[200],
-          focus_txt: "#046eff",
+          focus_txt: "#fa0601",
           focus_bg: colors.slate[50],
-          focus_border: "#046eff",
+          focus_border: "#fa0601",
         },
         
         // Whitelist proof widget

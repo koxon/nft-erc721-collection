@@ -110,6 +110,7 @@ export default class MintWidget extends React.Component<Props, State> {
                 <button className={"charity-grid-item " + (this.state.charityId==5 ? "charity-selected" : null)}
                      onClick={() => this.selectCharity(5)}><img src="/build/images/charities/Education.png" />Education</button>
               </div>
+              <div className="charity-label">Select the amount of Fry Heads NFTs you want to mint then click "Mint".</div>
             </div>
 
             <div className="controls">
