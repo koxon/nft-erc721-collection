@@ -29,10 +29,12 @@ contract FryHeadsNft is ERC721A, Ownable, ReentrancyGuard {
   uint public donationCount = 0;
   struct charity {
     string name;
+    string short_name;
+    string description;
     address addr;
     uint count;
   }
-  mapping(uint => charity) public charities;
+  charity[] public charities;
 
   constructor(
     string memory _tokenName,
@@ -69,35 +71,57 @@ contract FryHeadsNft is ERC721A, Ownable, ReentrancyGuard {
     _;
   }
 
+  function getCharities() public view returns (charity[] memory) {
+    return charities;
+  }
+
   function _initCharities() internal onlyOwner {
     charities[0] = charity({
       name: "Environment",
-      addr: 0x71c341d69eBd7B4ea781ca2F2A2a38837706EA85,
+      short_name: "Environment",
+      description: "Support US-based charities protecting the environment with a single donation. <a href='https://thegivingblock.com/impact-index-funds/environment/' target='_blank'>See on Giving Block.</a>",
+      addr: 0x95Bb8d2D7dac1B1c125877B22Dfd29B69d951c51,
+      // addr: 0x71c341d69eBd7B4ea781ca2F2A2a38837706EA85,
       count: 0
     });
     charities[1] = charity({
-      name: "Civil & Human Rights",
-      addr: 0xdA20057297daef660e16faE8c0603211014B9A7b,
+      name: "Civil &amp; Human Rights",
+      short_name: "Civil",
+      description: "Support US-based charities focused on civil and human rights issues with a single donation. <a href='https://thegivingblock.com/impact-index-funds/civil-human-rights/' target='_blank'>See on Giving Block.</a>",
+      addr: 0x886206B3c8E3D877755E16d013412C1686827133,
+      // addr: 0xdA20057297daef660e16faE8c0603211014B9A7b,
       count: 0
     });
     charities[2] = charity({
-      name: "Children & Youth",
-      addr: 0xBA7D2fB9Ed22F4f107b8DaE362b60216Bea6e56e,
+      name: "Children &amp; Youth",
+      short_name: "Children",
+      description: "Support US-based charities serving the needs of children with a single donation. <a href='https://thegivingblock.com/impact-index-funds/children-youth/' target='_blank'>See on Giving Block.</a>",
+      addr: 0x95Bb8d2D7dac1B1c125877B22Dfd29B69d951c51,
+      // addr: 0xBA7D2fB9Ed22F4f107b8DaE362b60216Bea6e56e,
       count: 0
     });
     charities[3] = charity({
-      name: "Poverty & Housing",
-      addr: 0x7120c3b207bDef1C5869c2aefAf115Ed49a27Cc2,
+      name: "Poverty &amp; Housing",
+      short_name: "Poverty",
+      description: "Support US-based charities working to relieve the difficulties of poverty and homelessness with a single donation. <a href='https://thegivingblock.com/impact-index-funds/poverty-housing/' target='_blank'>See on Giving Block.</a>",
+      addr: 0x886206B3c8E3D877755E16d013412C1686827133,
+      // addr: 0x7120c3b207bDef1C5869c2aefAf115Ed49a27Cc2,
       count: 0
     });
     charities[4] = charity({
       name: "Animals",
-      addr: 0x501bEBF5283a24c5D6e52FB8C851fEC0ff5525C8,
+      short_name: "Animals",
+      description: "Support US-based charities devoted to animal rights and protection with a single donation. <a href='https://thegivingblock.com/impact-index-funds/animals/' target='_blank'>See on Giving Block.</a>",
+      addr: 0x95Bb8d2D7dac1B1c125877B22Dfd29B69d951c51,
+      // addr: 0x501bEBF5283a24c5D6e52FB8C851fEC0ff5525C8,
       count: 0
     });
     charities[5] = charity({
       name: "Education",
-      addr: 0x4362152ce9AC6619a484A5BDf362976909471b56,
+      short_name: "Education",
+      description: "Support US-based charities devoted to providing high-quality education with a single donation. <a href='https://thegivingblock.com/impact-index-funds/education/' target='_blank'>See on Giving Block.</a>",
+      addr: 0x886206B3c8E3D877755E16d013412C1686827133,
+      // addr: 0x4362152ce9AC6619a484A5BDf362976909471b56,
       count: 0
     });
   }
