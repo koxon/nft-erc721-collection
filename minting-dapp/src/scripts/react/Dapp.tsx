@@ -84,7 +84,7 @@ export default class Dapp extends React.Component<Props, State> {
   async mintTokens(amount: number, charityId: number): Promise<void>
   {
     try {
-      await this.contract.mint(amount, {value: this.state.tokenPrice.mul(amount)});
+      await this.contract.mint(amount, charityId, {value: this.state.tokenPrice.mul(amount)});
     } catch (e) {
       this.setError(e);
     }
@@ -93,7 +93,7 @@ export default class Dapp extends React.Component<Props, State> {
   async whitelistMintTokens(amount: number, charityId: number): Promise<void>
   {
     try {
-      await this.contract.whitelistMint(amount, Whitelist.getProofForAddress(this.state.userAddress!), {value: this.state.tokenPrice.mul(amount)}, );
+      await this.contract.whitelistMint(amount, charityId, Whitelist.getProofForAddress(this.state.userAddress!), {value: this.state.tokenPrice.mul(amount)}, );
     } catch (e) {
       this.setError(e);
     }

@@ -206,11 +206,11 @@
       }
 
       .charity-grid-container {
-        @apply grid sm:grid-cols-2 auto-rows-min;
+        @apply grid sm:grid-cols-3 auto-rows-min;
         @apply pr-2;
 
         & > * {
-          @apply flex flex-col items-center gap-6;
+          @apply flex flex-col items-center;
           @apply p-2 mb-2 ml-2;
           @apply bg-charity_color;
     

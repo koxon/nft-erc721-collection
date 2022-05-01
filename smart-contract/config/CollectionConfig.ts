@@ -15,18 +15,18 @@ const CollectionConfig: CollectionConfigInterface = {
   hiddenMetadataUri: 'ipfs://QmUSeZpsQHVV5gBj5q4rAQ3viDFSakTVXcuc3dq6X9Z8cH/hidden.json',
   maxSupply: 10000,
   whitelistSale: {
-    price: 0.05,
-    maxMintAmountPerTx: 1,
-  },
-  preSale: {
-    price: 0.07,
-    maxMintAmountPerTx: 2,
-  },
-  publicSale: {
-    price: 0.09,
+    price: 0.025,
     maxMintAmountPerTx: 5,
   },
-  contractAddress: "0x25D586F047fB9B8347280152E173647d8A9cE9A4",
+  preSale: {
+    price: 0.030,
+    maxMintAmountPerTx: 5,
+  },
+  publicSale: {
+    price: 0.035,
+    maxMintAmountPerTx: 10,
+  },
+  contractAddress: "0xA9F2F952793372abd1e15A0Ce74DDb5fF82E4cc9",
   marketplaceIdentifier: 'fry-heads-token',
   marketplaceConfig: Marketplaces.openSea,
   whitelistAddresses,

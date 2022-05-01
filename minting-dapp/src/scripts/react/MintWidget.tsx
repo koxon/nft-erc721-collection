@@ -53,6 +53,9 @@ export default class MintWidget extends React.Component<Props, State> {
   }
 
   private selectCharity(id: number): void {
+    if (id == this.state.charityId)
+      return;
+
     this.setState({
       charityId: id
     });
@@ -73,13 +76,18 @@ export default class MintWidget extends React.Component<Props, State> {
     await this.props.whitelistMintTokens(this.state.mintAmount, this.state.charityId);
   }
 
+  private getRandomArbitrary(min: number, max: number): number {
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+
   render() {
     return (
       <>
         {this.canMint() ?
           <div className="mint-widget">
             <div className="preview">
-              <img src="/build/images/preview.png" alt="Collection preview" />
+              <img src={"/build/images/previews/" + this.getRandomArbitrary(1, 70).toString() + ".png"} alt="Collection preview" />
+              <span><small>"greetings human!"</small></span>
             </div>
           
             <div className="price">
@@ -87,20 +95,20 @@ export default class MintWidget extends React.Component<Props, State> {
             </div>
 
             <div className="charity-select">
-              <div className="charity-label">20% of the price will be sent to the charity of your choice</div>
+              <div className="charity-label">20% of the price will be sent to the <a href="https://thegivingblock.com/donate/" target="_blank">Giving Block</a> charity fund of your choice. Please select one below.</div>
               <div className="charity-grid-container">
                 <button className={"charity-grid-item " + (this.state.charityId==0 ? "charity-selected" : null)}
-                     onClick={() => this.selectCharity(0)}>Unicef</button>
+                     onClick={() => this.selectCharity(0)}><img src="/build/images/charities/Environment.png" />Environment</button>
                 <button className={"charity-grid-item " + (this.state.charityId==1 ? "charity-selected" : null)}
-                     onClick={() => this.selectCharity(1)}>Red Cross</button>
+                     onClick={() => this.selectCharity(1)}><img src="/build/images/charities/Civil.png" />Civil &amp; Human Rights</button>
                 <button className={"charity-grid-item " + (this.state.charityId==2 ? "charity-selected" : null)}
-                     onClick={() => this.selectCharity(2)}>Save the Children</button>
+                     onClick={() => this.selectCharity(2)}><img src="/build/images/charities/Children.png" />Children &amp; Youth</button>
                 <button className={"charity-grid-item " + (this.state.charityId==3 ? "charity-selected" : null)}
-                     onClick={() => this.selectCharity(3)}>Save the Planet</button>
+                     onClick={() => this.selectCharity(3)}><img src="/build/images/charities/Poverty.png" />Poverty &amp; Housing</button>
                 <button className={"charity-grid-item " + (this.state.charityId==4 ? "charity-selected" : null)}
-                     onClick={() => this.selectCharity(4)}>Ocean Cleanup</button>
+                     onClick={() => this.selectCharity(4)}><img src="/build/images/charities/Animals.png" />Animals</button>
                 <button className={"charity-grid-item " + (this.state.charityId==5 ? "charity-selected" : null)}
-                     onClick={() => this.selectCharity(5)}>Greenpeace</button>
+                     onClick={() => this.selectCharity(5)}><img src="/build/images/charities/Education.png" />Education</button>
               </div>
             </div>
 
