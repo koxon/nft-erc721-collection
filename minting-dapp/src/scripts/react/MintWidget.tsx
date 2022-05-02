@@ -13,6 +13,7 @@ interface Props {
   isUserInWhitelist: boolean;
   mintTokens(mintAmount: number, charityId: number): Promise<void>;
   whitelistMintTokens(mintAmount: number, charityId: number): Promise<void>;
+  charities: Record<string, any>[];
 }
 
 interface State {
@@ -81,6 +82,18 @@ export default class MintWidget extends React.Component<Props, State> {
   }
 
   render() {
+
+    // Load charities and render
+    let charityDivs = [];
+    for (let i = 0; i < this.props.charities.length; i++) {
+      let charity: Record<string, any> = {};
+      charity = this.props.charities[i];
+      charityDivs.push(
+        <button className={"charity-grid-item " + (this.state.charityId==i ? "charity-selected" : null)}
+                onClick={() => this.selectCharity(i)}><img src={"/build/images/charities/" + charity.short_name + ".png"}/>{charity.name}</button>
+      );
+    }
+
     return (
       <>
         {this.canMint() ?
@@ -97,18 +110,7 @@ export default class MintWidget extends React.Component<Props, State> {
             <div className="charity-select">
               <div className="charity-label">20% of the price will be sent to the <a href="https://thegivingblock.com/donate/" target="_blank">Giving Block</a> charity fund of your choice. Please select one below.</div>
               <div className="charity-grid-container">
-                <button className={"charity-grid-item " + (this.state.charityId==0 ? "charity-selected" : null)}
-                     onClick={() => this.selectCharity(0)}><img src="/build/images/charities/Environment.png" />Environment</button>
-                <button className={"charity-grid-item " + (this.state.charityId==1 ? "charity-selected" : null)}
-                     onClick={() => this.selectCharity(1)}><img src="/build/images/charities/Civil.png" />Civil &amp; Human Rights</button>
-                <button className={"charity-grid-item " + (this.state.charityId==2 ? "charity-selected" : null)}
-                     onClick={() => this.selectCharity(2)}><img src="/build/images/charities/Children.png" />Children &amp; Youth</button>
-                <button className={"charity-grid-item " + (this.state.charityId==3 ? "charity-selected" : null)}
-                     onClick={() => this.selectCharity(3)}><img src="/build/images/charities/Poverty.png" />Poverty &amp; Housing</button>
-                <button className={"charity-grid-item " + (this.state.charityId==4 ? "charity-selected" : null)}
-                     onClick={() => this.selectCharity(4)}><img src="/build/images/charities/Animals.png" />Animals</button>
-                <button className={"charity-grid-item " + (this.state.charityId==5 ? "charity-selected" : null)}
-                     onClick={() => this.selectCharity(5)}><img src="/build/images/charities/Education.png" />Education</button>
+                {charityDivs}
               </div>
               <div className="charity-label">Select the amount of Fry Heads NFTs you want to mint then click "Mint".</div>
             </div>

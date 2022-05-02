@@ -28,6 +28,7 @@ interface State {
   merkleProofManualAddress: string;
   merkleProofManualAddressFeedbackMessage: string|JSX.Element|null;
   errorMessage: string|JSX.Element|null;
+  charities: Record<string, any>[];
 }
 
 const defaultState: State = {
@@ -44,6 +45,7 @@ const defaultState: State = {
   merkleProofManualAddress: '',
   merkleProofManualAddressFeedbackMessage: null,
   errorMessage: null,
+  charities: []
 };
 
 export default class Dapp extends React.Component<Props, State> {
@@ -178,6 +180,7 @@ export default class Dapp extends React.Component<Props, State> {
                     isUserInWhitelist={this.state.isUserInWhitelist}
                     mintTokens={(mintAmount, charityId) => this.mintTokens(mintAmount, charityId)}
                     whitelistMintTokens={(mintAmount, charityId) => this.whitelistMintTokens(mintAmount, charityId)}
+                    charities={this.state.charities}
                   />
                   :
                   <div className="collection-sold-out">
@@ -318,6 +321,13 @@ export default class Dapp extends React.Component<Props, State> {
       this.provider.getSigner(),
     ) as NftContractType;
 
+    // Load all charities
+    let _charities = [];
+    for (let j = 0; j < (await this.contract.getCharitiesCount()).toNumber(); j++) {
+      var charity: Record<string, any> = (await this.contract.charities(j));
+      _charities.push(charity);
+    }
+    
     this.setState({
       maxSupply: (await this.contract.maxSupply()).toNumber(),
       totalSupply: (await this.contract.totalSupply()).toNumber(),
@@ -326,6 +336,7 @@ export default class Dapp extends React.Component<Props, State> {
       isPaused: await this.contract.paused(),
       isWhitelistMintEnabled: await this.contract.whitelistMintEnabled(),
       isUserInWhitelist: Whitelist.contains(this.state.userAddress ?? ''),
+      charities: _charities
     });
   }
 
