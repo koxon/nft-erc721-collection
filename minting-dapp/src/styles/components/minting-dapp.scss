@@ -80,6 +80,37 @@
     }
   }
 
+  .link-box {
+    @apply grid sm:grid-cols-3 auto-rows-min;
+    @apply rounded-lg;
+
+    @apply text-popups-txt text-sm;
+
+    & > * {
+      @apply flex flex-col items-center;
+      @apply px-2 py-4;
+
+      .label {
+        @apply text-xs text-label;
+      }
+    }
+
+    .link-about, .link-twitter, .link-discord {
+
+      @apply rounded-lg;
+
+      .label {
+        @apply block;
+
+        @apply font-semibold;
+      }
+
+      &.link-about, &.link-twitter {
+        @apply border-b sm:border-l-0 sm:border-r border-popups-internal_border;
+      }
+    }
+  }
+
   .collection-status {
     @apply grid sm:grid-cols-2 auto-rows-min;
     @apply rounded-lg;
@@ -101,6 +132,7 @@
     .user-address {
       @apply sm:col-span-2;
       @apply overflow-hidden;
+      @apply font-semibold;
 
       @apply border-b border-popups-internal_border;
 

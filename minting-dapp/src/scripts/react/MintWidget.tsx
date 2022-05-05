@@ -82,17 +82,6 @@ export default class MintWidget extends React.Component<Props, State> {
     return Math.floor(Math.random() * (max - min)) + min;
   }
 
-  // private getCharityDescription(): ReactFragment {
-  //   let desc: ReactFragment = React.createElement(React.Fragment, null);
-  //   if (this.state.charityId == -1) {
-  //     return desc;
-  //   }
-
-  //   desc = React.createElement(React.Fragment, null, React.createElement("div", null, this.props.charities[this.state.charityId].description));
-
-  //   return desc;
-  // }
-
   render() {
 
     // Load charities and render
@@ -127,7 +116,6 @@ export default class MintWidget extends React.Component<Props, State> {
               </div>
               <div className="charity-desc">
                 {(this.state.charityId == -1)?null:parse(this.props.charities[this.state.charityId].description)}
-                {/* {this.getCharityDescription} */}
               </div>
               <div className="charity-label">Select the amount of Fry Heads NFTs you want to mint then click "Mint".</div>
             </div>

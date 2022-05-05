@@ -144,6 +144,10 @@ export default class Dapp extends React.Component<Props, State> {
     });
   }
 
+  private handleClick = (e:string) => {
+    window.open(e);
+  }
+
   render() {
     return (
       <>
@@ -156,6 +160,12 @@ export default class Dapp extends React.Component<Props, State> {
 
         {this.state.errorMessage ? <div className="error"><p>{this.state.errorMessage}</p><button onClick={() => this.setError()}>Close</button></div> : null}
         
+          <div className="link-box">
+            <button className="link-about button primary" onClick={() => this.handleClick("")}>About</button>
+            <button className="link-twitter button primary" onClick={() => this.handleClick("https://twitter.com/FryHeadsNFT")}>Twitter</button>
+            <button className="link-discord button primary" onClick={() => this.handleClick("https://discord.gg/EVZJJmyTVm")}>Discord</button>
+          </div>
+
         {this.isWalletConnected() ?
           <>
             {this.isContractReady() ?
