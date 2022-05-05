@@ -14,12 +14,12 @@ module.exports = {
           from_bg: colors.slate[100],
           to_bg: colors.slate[200],
         },
-        titles: "#046eff",
+        titles: "#fa0601",
         links: {
-          txt: "#046eff",
-          hover_txt: "#046eff",
+          txt: "#fa0601",
+          hover_txt: "#fa0601",
         },
-        loading_spinner: "#046eff",
+        loading_spinner: "#fa0601",
         popups: {
           bg: colors.white,
           txt: colors.slate[800],
@@ -43,15 +43,16 @@ module.exports = {
           border: colors.slate[200],
           hover_txt: colors.slate[800],
           hover_bg: colors.slate[100],
-          hover_border: colors.slate[200],
+          hover_border: colors.slate[200]
         },
         btn_primary: {
-          txt: colors.black,
-          bg: "#fbd229",
-          border: "#fbd229",
-          hover_txt: colors.black,
-          hover_bg: "#ffde54",
-          hover_border: "#ffde54",
+          txt: colors.white,
+          bg: "#fa0601",
+          border: "#fa0601",
+          hover_txt: colors.white,
+          hover_bg: "#ff6966",
+          hover_border: "#ff6966",
+          down_bg: colors.black
         },
         btn_error: {
           txt: colors.white,
@@ -80,9 +81,9 @@ module.exports = {
         // Mint widget
         token_preview: "#ffffff",
         white_label: "#ffffff",
-        charity_desc_color: "#fbd229",
+        charity_desc_color: "#fed681",
         charity_color: "#e6e6e6",
-        charity_selected_color: "#fbd329",
+        charity_selected_color: "#ffad00",
       },
     },
   },

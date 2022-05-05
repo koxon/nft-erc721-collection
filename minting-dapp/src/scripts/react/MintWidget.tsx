@@ -1,5 +1,6 @@
 import { utils, BigNumber } from 'ethers';
-import React from 'react';
+import React, { ReactFragment } from 'react';
+import parse from "html-react-parser";
 import NetworkConfigInterface from '../../../../smart-contract/lib/NetworkConfigInterface';
 
 interface Props {
@@ -81,6 +82,17 @@ export default class MintWidget extends React.Component<Props, State> {
     return Math.floor(Math.random() * (max - min)) + min;
   }
 
+  // private getCharityDescription(): ReactFragment {
+  //   let desc: ReactFragment = React.createElement(React.Fragment, null);
+  //   if (this.state.charityId == -1) {
+  //     return desc;
+  //   }
+
+  //   desc = React.createElement(React.Fragment, null, React.createElement("div", null, this.props.charities[this.state.charityId].description));
+
+  //   return desc;
+  // }
+
   render() {
 
     // Load charities and render
@@ -90,6 +102,7 @@ export default class MintWidget extends React.Component<Props, State> {
       charity = this.props.charities[i];
       charityDivs.push(
         <button className={"charity-grid-item " + (this.state.charityId==i ? "charity-selected" : null)}
+                key={"charity-" + i}
                 onClick={() => this.selectCharity(i)}><img src={"/build/images/charities/" + charity.short_name + ".png"}/>{charity.name}</button>
       );
     }
@@ -111,6 +124,10 @@ export default class MintWidget extends React.Component<Props, State> {
               <div className="charity-label">20% of the price will be sent to the <a href="https://thegivingblock.com/donate/" target="_blank">Giving Block</a> charity fund of your choice. Please select one below.</div>
               <div className="charity-grid-container">
                 {charityDivs}
+              </div>
+              <div className="charity-desc">
+                {(this.state.charityId == -1)?null:parse(this.props.charities[this.state.charityId].description)}
+                {/* {this.getCharityDescription} */}
               </div>
               <div className="charity-label">Select the amount of Fry Heads NFTs you want to mint then click "Mint".</div>
             </div>
