@@ -27,6 +27,7 @@ contract FryHeadsNft is ERC721A, Ownable, ReentrancyGuard {
   bool public revealed = false;
 
   uint public donationCount = 0;
+  // Charity infos
   struct charity {
     string name;
     string short_name;
@@ -35,6 +36,9 @@ contract FryHeadsNft is ERC721A, Ownable, ReentrancyGuard {
     uint count;
   }
   charity[] public charities;
+
+  // List of charities associated to each token
+  charity[] public tokenCharity;
 
   constructor(
     string memory _tokenName,
@@ -77,10 +81,18 @@ contract FryHeadsNft is ERC721A, Ownable, ReentrancyGuard {
 
   function _initCharities() internal onlyOwner {
     charities.push(charity({
+      name: "Education",
+      short_name: "Education",
+      description: "Support US-based charities devoted to providing high-quality education with a single donation. <a href='https://thegivingblock.com/impact-index-funds/education/' target='_blank'>See on Giving Block.</a>",
+      addr: 0x886206B3c8E3D877755E16d013412C1686827133, // Dev wallets 133
+      // addr: 0x4362152ce9AC6619a484A5BDf362976909471b56, // REAL ones
+      count: 0
+    }));
+    charities.push(charity({
       name: "Environment",
       short_name: "Environment",
       description: "Support US-based charities protecting the environment with a single donation. <a href='https://thegivingblock.com/impact-index-funds/environment/' target='_blank'>See on Giving Block.</a>",
-      addr: 0x95Bb8d2D7dac1B1c125877B22Dfd29B69d951c51,
+      addr: 0x95Bb8d2D7dac1B1c125877B22Dfd29B69d951c51, //Dev wallets c51
       // addr: 0x71c341d69eBd7B4ea781ca2F2A2a38837706EA85,
       count: 0
     }));
@@ -116,12 +128,13 @@ contract FryHeadsNft is ERC721A, Ownable, ReentrancyGuard {
       // addr: 0x501bEBF5283a24c5D6e52FB8C851fEC0ff5525C8,
       count: 0
     }));
-    charities.push(charity({
-      name: "Education",
-      short_name: "Education",
-      description: "Support US-based charities devoted to providing high-quality education with a single donation. <a href='https://thegivingblock.com/impact-index-funds/education/' target='_blank'>See on Giving Block.</a>",
-      addr: 0x886206B3c8E3D877755E16d013412C1686827133,
-      // addr: 0x4362152ce9AC6619a484A5BDf362976909471b56,
+
+    // Push empty charity for token #0 as there is none
+    tokenCharity.push(charity({
+      name: "No #0 token",
+      short_name: "No #0 token",
+      description: "No #0 token",
+      addr: 0x0000000000000000000000000000000000000000,
       count: 0
     }));
   }
@@ -134,16 +147,19 @@ contract FryHeadsNft is ERC721A, Ownable, ReentrancyGuard {
     require(MerkleProof.verify(_merkleProof, merkleRoot, leaf), 'Invalid proof!');
 
     whitelistClaimed[_msgSender()] = true;
-    donationCount += 1;
-    charities[_charityId].count += 1;
+    donationCount += _mintAmount;
+    charities[_charityId].count += _mintAmount;
     _safeMint(_msgSender(), _mintAmount);
   }
 
   function mint(uint256 _mintAmount, uint _charityId) external payable mintCompliance(_mintAmount) mintPriceCompliance(_mintAmount) {
     require(!paused, 'The contract is paused!');
 
-    donationCount += 1;
-    charities[_charityId].count += 1;
+    donationCount += _mintAmount;
+    charities[_charityId].count += _mintAmount;
+    for (uint i = (totalSupply()+1); i <= (totalSupply() + _mintAmount); i++) {
+      tokenCharity.push(charities[_charityId]);
+    }
     _safeMint(_msgSender(), _mintAmount);
   }
   
@@ -184,7 +200,7 @@ contract FryHeadsNft is ERC721A, Ownable, ReentrancyGuard {
   }
 
   function payableToCharity() public view returns (uint256) {
-    return address(this).balance * 20 / 100;
+    return address(this).balance * 0 / 100;
   }
 
   function tokenURI(uint256 _tokenId) public view virtual override returns (string memory) {

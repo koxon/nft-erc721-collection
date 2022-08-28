@@ -159,12 +159,6 @@ export default class Dapp extends React.Component<Props, State> {
           : null}
 
         {this.state.errorMessage ? <div className="error"><p>{this.state.errorMessage}</p><button onClick={() => this.setError()}>Close</button></div> : null}
-        
-          <div className="link-box">
-            <button className="link-about button primary" onClick={() => this.handleClick("")}>About</button>
-            <button className="link-twitter button primary" onClick={() => this.handleClick("https://twitter.com/FryHeadsNFT")}>Twitter</button>
-            <button className="link-discord button primary" onClick={() => this.handleClick("https://discord.gg/EVZJJmyTVm")}>Discord</button>
-          </div>
 
         {this.isWalletConnected() ?
           <>
@@ -215,14 +209,15 @@ export default class Dapp extends React.Component<Props, State> {
 
         {!this.isWalletConnected() || !this.isSoldOut() ?
           <div className="no-wallet">
-            {!this.isWalletConnected() ? <button className="primary" disabled={this.provider === undefined} onClick={() => this.connectWallet()}>Connect Wallet</button> : null}
-            
             <div className="use-block-explorer">
-              Hey, looking for a <strong>super-safe experience</strong>? <span className="emoji">😃</span><br />
-              You can interact with the smart-contract <strong>directly</strong> through <a href={this.generateContractUrl()} target="_blank">{this.state.networkConfig.blockExplorer.name}</a>, without even connecting your wallet to this DAPP! <span className="emoji">🚀</span><br />
-              <br />
-              Keep safe! <span className="emoji">❤️</span>
+              <strong>Buy a FryHead and automatically donate to the charity of your choice, in perpetuity, each time your NFT changes hands.</strong><br /><br />
+              You need to be on the Polygon blockchain and have MATIC tokens to buy your FryHeads. MoonPay can help you buy MATIC easily <a href="https://www.moonpay.com/buy/matic" target="_blank">here</a>.<br /><br />
+              Transfer your MATIC to your Metamask wallet, connect it to this page by clicking the "Connect Wallet" button below and mint your first FryHeads! <br /><br />
             </div>
+
+            {!this.isWalletConnected() ? <button className="primary" disabled={this.provider === undefined} onClick={() => this.connectWallet()}>Connect Wallet</button> : null}
+            <br/>
+            <hr />
 
             {!this.isWalletConnected() || this.state.isWhitelistMintEnabled ?
               <div className="merkle-proof-manual-address">

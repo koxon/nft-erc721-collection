@@ -100,24 +100,24 @@ export default class MintWidget extends React.Component<Props, State> {
       <>
         {this.canMint() ?
           <div className="mint-widget">
-            <div className="preview">
+            {/* <div className="preview">
               <img src={"/build/images/previews/" + this.getRandomArbitrary(1, 70).toString() + ".png"} alt="Collection preview" />
-              <span><small>"greetings human!"</small></span>
-            </div>
+              <span><small>preview</small></span>
+            </div> */}
           
             <div className="price">
               <strong>Total price:</strong> {utils.formatEther(this.props.tokenPrice.mul(this.state.mintAmount))} {this.props.networkConfig.symbol}
             </div>
 
             <div className="charity-select">
-              <div className="charity-label">20% of the price will be sent to the <a href="https://thegivingblock.com/donate/" target="_blank">Giving Block</a> charity fund of your choice. Please select one below.</div>
+              <div className="charity-label">Buy a FryHead and 50% of the price will automatically be sent out to the <a href="https://thegivingblock.com/donate/" target="_blank">Giving Block</a> charity fund of your choice. Please select one below.</div>
               <div className="charity-grid-container">
                 {charityDivs}
               </div>
               <div className="charity-desc">
                 {(this.state.charityId == -1)?null:parse(this.props.charities[this.state.charityId].description)}
               </div>
-              <div className="charity-label">Select the amount of Fry Heads NFTs you want to mint then click "Mint".</div>
+              {/* <div className="charity-label">Select the amount of Fry Heads NFTs you want to mint then click "Mint".</div> */}
             </div>
 
             <div className="controls">

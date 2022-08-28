@@ -8,7 +8,7 @@ body {
   @apply bg-gradient-to-b from-page-from_bg via-page-from_bg to-page-to_bg;
 
   // Fullscreen background image example
-  background-color: rgb(235, 235, 235);
+  background-color: rgb(254, 3, 2);
   background-image: url('../../images/background.png');
   @apply bg-center bg-cover bg-fixed;
 }
@@ -96,6 +96,11 @@ button {
 
   &.charity-grid-item {
     @apply rounded-md;
+
+    &:hover {
+      @apply bg-btn_primary-hover_bg;
+      @apply border-btn_primary-hover_border;
+    }
   }
 
   &.primary {

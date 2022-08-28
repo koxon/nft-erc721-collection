@@ -46,8 +46,8 @@ module.exports = {
           hover_border: colors.slate[200]
         },
         btn_primary: {
-          txt: colors.white,
-          bg: "#fa0601",
+          txt: colors.black,
+          bg: "#fbd329",
           border: "#fa0601",
           hover_txt: colors.white,
           hover_bg: "#ff6966",
@@ -81,9 +81,9 @@ module.exports = {
         // Mint widget
         token_preview: "#ffffff",
         white_label: "#ffffff",
-        charity_desc_color: "#fed681",
+        charity_desc_color: "#fbd329",
         charity_color: "#e6e6e6",
-        charity_selected_color: "#ffad00",
+        charity_selected_color: "#fbd329",
       },
     },
   },
