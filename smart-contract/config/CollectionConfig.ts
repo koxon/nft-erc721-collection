@@ -29,7 +29,7 @@ const CollectionConfig: CollectionConfigInterface = {
     //price: 5, // PROD Price
     maxMintAmountPerTx: 10,
   },
-  contractAddress: "0x050F0E5C96ED83dd11989461517BB9F86CA06a79",
+  contractAddress: "0x14Ea4A3A37132516a00E0dc197C2D85F45402b49",
   marketplaceIdentifier: 'fryheads-token',
   marketplaceConfig: Marketplaces.openSea,
   whitelistAddresses: whitelistAddresses,

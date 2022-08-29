@@ -16,6 +16,7 @@ interface Props {
 
 interface State {
   userAddress: string|null;
+  contractAddress: string|null;
   network: ethers.providers.Network|null;
   networkConfig: NetworkConfigInterface;
   totalSupply: number;
@@ -33,6 +34,7 @@ interface State {
 
 const defaultState: State = {
   userAddress: null,
+  contractAddress: null,
   network: null,
   networkConfig: CollectionConfig.mainnet,
   totalSupply: 0,
@@ -67,11 +69,7 @@ export default class Dapp extends React.Component<Props, State> {
     if (browserProvider?.isMetaMask !== true) {
       this.setError( 
         <>
-          We were not able to detect <strong>MetaMask</strong>. We value <strong>privacy and security</strong> a lot so we limit the wallet options on the DAPP.<br />
-          <br />
-          But don't worry! <span className="emoji">😃</span> You can always interact with the smart-contract through <a href={this.generateContractUrl()} target="_blank">{this.state.networkConfig.blockExplorer.name}</a> and <strong>we do our best to provide you with the best user experience possible</strong>, even from there.<br />
-          <br />
-          You can also get your <strong>Whitelist Proof</strong> manually, using the tool below.
+          We were not able to detect <strong>MetaMask</strong>.
         </>,
       );
     }
@@ -166,6 +164,7 @@ export default class Dapp extends React.Component<Props, State> {
               <>
                 <CollectionStatus
                   userAddress={this.state.userAddress}
+                  contractAddress={this.state.contractAddress}
                   maxSupply={this.state.maxSupply}
                   totalSupply={this.state.totalSupply}
                   isPaused={this.state.isPaused}
@@ -307,18 +306,19 @@ export default class Dapp extends React.Component<Props, State> {
 
       return;
     }
-    
-    this.setState({
-      userAddress: walletAccounts[0],
-      network,
-      networkConfig,
-    });
 
     if (await this.provider.getCode(CollectionConfig.contractAddress!) === '0x') {
       this.setError('Could not find the contract, are you connected to the right chain?');
 
       return;
     }
+
+    this.setState({
+      userAddress: walletAccounts[0],
+      contractAddress: CollectionConfig.contractAddress,
+      network,
+      networkConfig,
+    });
 
     this.contract = new ethers.Contract(
       CollectionConfig.contractAddress!,

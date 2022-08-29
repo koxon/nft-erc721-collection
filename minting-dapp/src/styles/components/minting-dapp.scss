@@ -145,6 +145,22 @@
       }
     }
 
+    .contract-address {
+      @apply sm:col-span-2;
+      @apply overflow-hidden;
+      @apply font-semibold;
+
+      @apply border-b border-popups-internal_border;
+
+      .address {
+        @apply w-full;
+        
+        @apply font-semibold;
+        @apply truncate;
+        @apply text-center;
+      }
+    }
+
     .supply, .current-sale {
       .label {
         @apply block;
