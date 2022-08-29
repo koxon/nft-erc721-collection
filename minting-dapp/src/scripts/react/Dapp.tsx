@@ -216,7 +216,7 @@ export default class Dapp extends React.Component<Props, State> {
 
             {!this.isWalletConnected() ? <button className="primary" disabled={this.provider === undefined} onClick={() => this.connectWallet()}>Connect Wallet</button> : null}
             <br/>
-            <hr />
+            {/* <hr /> */}
 
             {/* {!this.isWalletConnected() || this.state.isWhitelistMintEnabled ?
               <div className="merkle-proof-manual-address">
