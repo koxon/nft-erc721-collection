@@ -210,8 +210,8 @@ export default class Dapp extends React.Component<Props, State> {
           <div className="no-wallet">
             <div className="use-block-explorer">
               <strong>Buy a FryHead and automatically donate to the charity of your choice, in perpetuity, each time your NFT changes hands.</strong><br /><br />
-              You need to be on the Polygon blockchain and have MATIC tokens to buy your FryHeads. MoonPay can help you buy MATIC easily <a href="https://www.moonpay.com/buy/matic" target="_blank">here</a>.<br /><br />
-              Transfer your MATIC to your Metamask wallet, connect it to this page by clicking the "Connect Wallet" button below and mint your first FryHeads! <br /><br />
+              You need to be on the Ethereum blockchain and have ETH tokens to buy your FryHeads. MoonPay can help you buy ETH easily <a href="https://www.moonpay.com/buy/eth" target="_blank">here</a>.<br /><br />
+              Transfer your ETH to your Metamask wallet, connect it to this page by clicking the "Connect Wallet" button below and mint your first FryHeads! <br /><br />
             </div>
 
             {!this.isWalletConnected() ? <button className="primary" disabled={this.provider === undefined} onClick={() => this.connectWallet()}>Connect Wallet</button> : null}
