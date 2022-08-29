@@ -38,7 +38,7 @@ contract FryHeadsNft is ERC721A, Ownable, ReentrancyGuard {
   charity[] public charities;
 
   // List of charities associated to each token
-  charity[] public tokenCharity;
+  int[] public tokenCharity;
 
   constructor(
     string memory _tokenName,
@@ -77,6 +77,10 @@ contract FryHeadsNft is ERC721A, Ownable, ReentrancyGuard {
 
   function getCharitiesCount() public view returns (uint) {
     return charities.length;
+  }
+
+  function getTokenAssociatedCharity(uint256 _tokenId) public view returns (int) {
+    return tokenCharity[_tokenId];
   }
 
   function _initCharities() internal onlyOwner {
@@ -130,13 +134,7 @@ contract FryHeadsNft is ERC721A, Ownable, ReentrancyGuard {
     }));
 
     // Push empty charity for token #0 as there is none
-    tokenCharity.push(charity({
-      name: "No #0 token",
-      short_name: "No #0 token",
-      description: "No #0 token",
-      addr: 0x0000000000000000000000000000000000000000,
-      count: 0
-    }));
+    tokenCharity.push(-1);
   }
 
   function whitelistMint(uint256 _mintAmount, uint _charityId, bytes32[] calldata _merkleProof) external payable mintCompliance(_mintAmount) mintPriceCompliance(_mintAmount) {
@@ -149,6 +147,9 @@ contract FryHeadsNft is ERC721A, Ownable, ReentrancyGuard {
     whitelistClaimed[_msgSender()] = true;
     donationCount += _mintAmount;
     charities[_charityId].count += _mintAmount;
+    for (uint i = (totalSupply()+1); i <= (totalSupply() + _mintAmount); i++) {
+      tokenCharity.push(int(_charityId));
+    }
     _safeMint(_msgSender(), _mintAmount);
   }
 
@@ -158,7 +159,7 @@ contract FryHeadsNft is ERC721A, Ownable, ReentrancyGuard {
     donationCount += _mintAmount;
     charities[_charityId].count += _mintAmount;
     for (uint i = (totalSupply()+1); i <= (totalSupply() + _mintAmount); i++) {
-      tokenCharity.push(charities[_charityId]);
+      tokenCharity.push(int(_charityId));
     }
     _safeMint(_msgSender(), _mintAmount);
   }
@@ -200,7 +201,7 @@ contract FryHeadsNft is ERC721A, Ownable, ReentrancyGuard {
   }
 
   function payableToCharity() public view returns (uint256) {
-    return address(this).balance * 0 / 100;
+    return address(this).balance * 50 / 100;
   }
 
   function tokenURI(uint256 _tokenId) public view virtual override returns (string memory) {
