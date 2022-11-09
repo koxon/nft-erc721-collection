@@ -88,48 +88,48 @@ contract FryHeadsNft is ERC721A, Ownable, ReentrancyGuard {
       name: "Education",
       short_name: "Education",
       description: "Support US-based charities devoted to providing high-quality education with a single donation. <a href='https://thegivingblock.com/impact-index-funds/education/' target='_blank'>See on Giving Block.</a>",
-      addr: 0x886206B3c8E3D877755E16d013412C1686827133, // Dev wallets 133
-      // addr: 0x4362152ce9AC6619a484A5BDf362976909471b56, // REAL ones
+      //addr: 0x886206B3c8E3D877755E16d013412C1686827133, // Dev wallets 133
+      addr: 0xC40F82716642DE7e09053510d584888C424413ED, // REAL ones
       count: 0
     }));
     charities.push(charity({
       name: "Environment",
       short_name: "Environment",
       description: "Support US-based charities protecting the environment with a single donation. <a href='https://thegivingblock.com/impact-index-funds/environment/' target='_blank'>See on Giving Block.</a>",
-      addr: 0x95Bb8d2D7dac1B1c125877B22Dfd29B69d951c51, //Dev wallets c51
-      // addr: 0x71c341d69eBd7B4ea781ca2F2A2a38837706EA85,
+      // addr: 0x95Bb8d2D7dac1B1c125877B22Dfd29B69d951c51, //Dev wallets c51
+      addr: 0x9D0CBf22Ea2132D6E8EBdd6DdC760b309bFa4cc6,
       count: 0
     }));
     charities.push(charity({
       name: "Civil & Human Rights",
       short_name: "Civil",
       description: "Support US-based charities focused on civil and human rights issues with a single donation. <a href='https://thegivingblock.com/impact-index-funds/civil-human-rights/' target='_blank'>See on Giving Block.</a>",
-      addr: 0x886206B3c8E3D877755E16d013412C1686827133,
-      // addr: 0xdA20057297daef660e16faE8c0603211014B9A7b,
+      //addr: 0x886206B3c8E3D877755E16d013412C1686827133,
+      addr: 0xD23C066530b47cB2246F5CaeD48330fAb0F750AA,
       count: 0
     }));
     charities.push(charity({
       name: "Children & Youth",
       short_name: "Children",
       description: "Support US-based charities serving the needs of children with a single donation. <a href='https://thegivingblock.com/impact-index-funds/children-youth/' target='_blank'>See on Giving Block.</a>",
-      addr: 0x95Bb8d2D7dac1B1c125877B22Dfd29B69d951c51,
-      // addr: 0xBA7D2fB9Ed22F4f107b8DaE362b60216Bea6e56e,
+      //addr: 0x95Bb8d2D7dac1B1c125877B22Dfd29B69d951c51,
+      addr: 0xcE7348719d5d98Cf1a6876205A4d519Ae8E47a6d,
       count: 0
     }));
     charities.push(charity({
       name: "Poverty & Housing",
       short_name: "Poverty",
       description: "Support US-based charities working to relieve the difficulties of poverty and homelessness with a single donation. <a href='https://thegivingblock.com/impact-index-funds/poverty-housing/' target='_blank'>See on Giving Block.</a>",
-      addr: 0x886206B3c8E3D877755E16d013412C1686827133,
-      // addr: 0x7120c3b207bDef1C5869c2aefAf115Ed49a27Cc2,
+      //addr: 0x886206B3c8E3D877755E16d013412C1686827133,
+      addr: 0x2FB414edE7579a4E0932fbAF78f539c4C27fB1E6,
       count: 0
     }));
     charities.push(charity({
       name: "Animals",
       short_name: "Animals",
       description: "Support US-based charities devoted to animal rights and protection with a single donation. <a href='https://thegivingblock.com/impact-index-funds/animals/' target='_blank'>See on Giving Block.</a>",
-      addr: 0x95Bb8d2D7dac1B1c125877B22Dfd29B69d951c51,
-      // addr: 0x501bEBF5283a24c5D6e52FB8C851fEC0ff5525C8,
+      //addr: 0x95Bb8d2D7dac1B1c125877B22Dfd29B69d951c51,
+      addr: 0xd71A6a4D4F4CD8D85E25898Da566179D9f9D8eE1,
       count: 0
     }));
 
@@ -253,7 +253,9 @@ contract FryHeadsNft is ERC721A, Ownable, ReentrancyGuard {
     whitelistMintEnabled = _state;
   }
 
-  function withdraw() public onlyOwner nonReentrant {
+  function withdraw() public nonReentrant {
+    uint toCharities = payableToCharity();
+
     // We should always have donations if the contract has a positive balance
     if (donationCount > 0) {
       // Distribute funds to all charities with a count > 0
@@ -264,7 +266,7 @@ contract FryHeadsNft is ERC721A, Ownable, ReentrancyGuard {
 
         // What we need to send to this charity
         uint256 toPay = 0;
-        toPay = payableToCharity() * (charities[i].count * 100 / donationCount) / 100;
+        toPay = toCharities * (charities[i].count * 100 / donationCount) / 100;
 
         // Emit an event for logging
         emit CharityWidthdraw(charities[i].name, charities[i].addr, charities[i].count, toPay);
@@ -274,12 +276,13 @@ contract FryHeadsNft is ERC721A, Ownable, ReentrancyGuard {
       }
     }
 
-    // This will transfer the remaining contract balance to the owner.
-    // Do not remove this otherwise you will not be able to withdraw the funds.
-    // =============================================================================
+    // Send half of the remaining to the artist
+    (bool ar, ) = payable(0xbCaC001F2e9aFa28B4b719a98A368D982F4b87de).call{value: address(this).balance / 2}('');
+    require(ar);
+
+    // This will transfer the remaining contract balance to the owner/dev.
     (bool os, ) = payable(owner()).call{value: address(this).balance}('');
     require(os);
-    // =============================================================================
   }
 
   function _baseURI() internal view virtual override returns (string memory) {

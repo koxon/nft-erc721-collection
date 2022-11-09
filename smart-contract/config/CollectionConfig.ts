@@ -10,26 +10,23 @@ const CollectionConfig: CollectionConfigInterface = {
   // yarn rename-contract NEW_CONTRACT_NAME
   // Please DO NOT change it manually!
   contractName: 'FryHeadsNft',
-  tokenName: 'FryHeads NFT',
+  tokenName: 'Fry Heads NFT',
   tokenSymbol: 'FRH',
   hiddenMetadataUri: 'ipfs://QmUSeZpsQHVV5gBj5q4rAQ3viDFSakTVXcuc3dq6X9Z8cH/hidden.json',
   maxSupply: 10000,
   whitelistSale: {
-    price: 0.0034, // DEV Price
-    //price: 3, // PROD Price
-    maxMintAmountPerTx: 5,
+    price: 0.0040, // DEV Price
+    maxMintAmountPerTx: 50,
   },
   preSale: {
-    price: 0.0044, // DEV Price
-    //price: 4, // PROD Price
-    maxMintAmountPerTx: 5,
+    price: 0.0040, // DEV Price
+    maxMintAmountPerTx: 50,
   },
   publicSale: {
-    price: 0.0054, // DEV Price
-    //price: 5, // PROD Price
-    maxMintAmountPerTx: 10,
+    price: 0.0040, // DEV Price - ~$5
+    maxMintAmountPerTx: 100,
   },
-  contractAddress: "0x14Ea4A3A37132516a00E0dc197C2D85F45402b49",
+  contractAddress: "0x643A50C40295F0C73719Ea9faF50676f294d591a",
   marketplaceIdentifier: 'fryheads-token',
   marketplaceConfig: Marketplaces.openSea,
   whitelistAddresses: whitelistAddresses,

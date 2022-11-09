@@ -8,7 +8,7 @@ body {
   @apply bg-gradient-to-b from-page-from_bg via-page-from_bg to-page-to_bg;
 
   // Fullscreen background image example
-  background-color: rgb(254, 3, 2);
+  background-color: rgb(155, 0, 0);
   background-image: url('../../images/background.png');
   @apply bg-center bg-cover bg-fixed;
 }

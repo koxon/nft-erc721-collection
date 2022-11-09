@@ -94,6 +94,7 @@ export default class Dapp extends React.Component<Props, State> {
   {
     try {
       await this.contract.whitelistMint(amount, charityId, Whitelist.getProofForAddress(this.state.userAddress!), {value: this.state.tokenPrice.mul(amount)}, );
+      alert("Your token has been minted.");
     } catch (e) {
       this.setError(e);
     }
@@ -158,10 +159,43 @@ export default class Dapp extends React.Component<Props, State> {
 
         {this.state.errorMessage ? <div className="error"><p>{this.state.errorMessage}</p><button onClick={() => this.setError()}>Close</button></div> : null}
 
+
+        <div className="no-wallet">
+          <div className="use-block-explorer">
+            <strong>The FryHeads are charitable NFTs. 50% of the mint price and secondary sales fees go to the charity of your choice, in perpetuity.</strong><br /><br />
+            You need to be on the Ethereum blockchain and have ETH tokens to buy your FryHeads. <br /><br /> MoonPay can help you buy ETH easily <a href="https://www.moonpay.com/buy/eth" target="_blank">here</a>.<br /><br />
+            Transfer your ETH to your Metamask wallet, connect it to this page by clicking the "Connect Wallet" button below and mint your first FryHeads!
+          </div>
+          <br />
+          <button className="primary" onClick={() => window.open('https://twitter.com/FryHeadsNFT', '_blank', 'noopener,noreferrer')}>Contact us on Twitter</button>
+
+          {!this.isWalletConnected() ? <button className="primary" disabled={this.provider === undefined} onClick={() => this.connectWallet()}>Connect Wallet</button> : null}
+          {/* <hr /> */}
+
+          {/* {!this.isWalletConnected() || this.state.isWhitelistMintEnabled ?
+            <div className="merkle-proof-manual-address">
+              <h2>Whitelist Proof</h2>
+              <p>
+                Anyone can generate the proof using any public address in the list, but <strong>only the owner of that address</strong> will be able to make a successful transaction by using it.
+              </p>
+
+              {this.state.merkleProofManualAddressFeedbackMessage ? <div className="feedback-message">{this.state.merkleProofManualAddressFeedbackMessage}</div> : null}
+
+              <label htmlFor="merkle-proof-manual-address">Public address:</label>
+              <input id="merkle-proof-manual-address" type="text" placeholder="0x000..." disabled={this.state.userAddress !== null} value={this.state.userAddress ?? this.state.merkleProofManualAddress} ref={(input) => this.merkleProofManualAddressInput = input!} onChange={() => {this.setState({merkleProofManualAddress: this.merkleProofManualAddressInput.value})}} /> <button onClick={() => this.copyMerkleProofToClipboard()}>Generate and copy to clipboard</button>
+            </div>
+            : null} */}
+        </div>
+{/* 
+        <div className="contact-us">
+          <span>Contact us on <a href="https://twitter.com/FryHeadsNFT" target="_blank">Twitter</a></span>
+        </div> */}
+
         {this.isWalletConnected() ?
           <>
             {this.isContractReady() ?
               <>
+
                 <CollectionStatus
                   userAddress={this.state.userAddress}
                   contractAddress={this.state.contractAddress}
@@ -192,6 +226,19 @@ export default class Dapp extends React.Component<Props, State> {
                     You can buy from our beloved holders on <a href={this.generateMarketplaceUrl()} target="_blank">{CollectionConfig.marketplaceConfig.name}</a>.
                   </div>
                 }
+                <div className="footer">
+                  <div>
+                    <small>Verify the transaction on <a href="https://etherscan.io/">etherscan.io</a>. You will find your NFT in your wallet once the transaction is confirmed.</small>
+                  </div>
+                  <hr />
+                  <div>
+                  <small>
+                    To know which charity your NFT supports you can use the <strong>tokenCharity(token_id)</strong> contract function to get the charity ID associated with it. 
+                    Then you can use the <strong>charities(charity_id)</strong> contract function to get the charity detailed information. 
+                    You can run those functions directly from <a href="https://etherscan.io/">etherscan.io</a>.
+                  </small>
+                  </div>
+                </div>
               </>
               :
               <div className="collection-not-ready">
@@ -205,34 +252,6 @@ export default class Dapp extends React.Component<Props, State> {
             }
           </>
         : null}
-
-        {!this.isWalletConnected() || !this.isSoldOut() ?
-          <div className="no-wallet">
-            <div className="use-block-explorer">
-              <strong>Buy a FryHead and automatically donate to the charity of your choice, in perpetuity, each time your NFT changes hands.</strong><br /><br />
-              You need to be on the Ethereum blockchain and have ETH tokens to buy your FryHeads. MoonPay can help you buy ETH easily <a href="https://www.moonpay.com/buy/eth" target="_blank">here</a>.<br /><br />
-              Transfer your ETH to your Metamask wallet, connect it to this page by clicking the "Connect Wallet" button below and mint your first FryHeads! <br /><br />
-            </div>
-
-            {!this.isWalletConnected() ? <button className="primary" disabled={this.provider === undefined} onClick={() => this.connectWallet()}>Connect Wallet</button> : null}
-            <br/>
-            {/* <hr /> */}
-
-            {/* {!this.isWalletConnected() || this.state.isWhitelistMintEnabled ?
-              <div className="merkle-proof-manual-address">
-                <h2>Whitelist Proof</h2>
-                <p>
-                  Anyone can generate the proof using any public address in the list, but <strong>only the owner of that address</strong> will be able to make a successful transaction by using it.
-                </p>
-
-                {this.state.merkleProofManualAddressFeedbackMessage ? <div className="feedback-message">{this.state.merkleProofManualAddressFeedbackMessage}</div> : null}
-
-                <label htmlFor="merkle-proof-manual-address">Public address:</label>
-                <input id="merkle-proof-manual-address" type="text" placeholder="0x000..." disabled={this.state.userAddress !== null} value={this.state.userAddress ?? this.state.merkleProofManualAddress} ref={(input) => this.merkleProofManualAddressInput = input!} onChange={() => {this.setState({merkleProofManualAddress: this.merkleProofManualAddressInput.value})}} /> <button onClick={() => this.copyMerkleProofToClipboard()}>Generate and copy to clipboard</button>
-              </div>
-              : null} */}
-          </div>
-          : null}
       </>
     );
   }
