@@ -33,12 +33,12 @@ export default class CollectionStatus extends React.Component<Props, State> {
       <>
         <div className="collection-status">
           <div className="user-address">
-            <span className="label">Your Wallet</span>
+            <span className="label">Your Wallet address</span>
             <span className="address">{this.props.userAddress}</span>
           </div>
 
           <div className="contract-address">
-            <span className="label">FryHeads Contract</span>
+            <span className="label">FryHeads Contract address</span>
             <span className="address"><a href={'https://etherscan.io/address/' + this.props.contractAddress} target="_blank">{this.props.contractAddress}</a></span>
           </div>
           

@@ -9,6 +9,8 @@ import CollectionStatus from './CollectionStatus';
 import MintWidget from './MintWidget';
 import Whitelist from '../lib/Whitelist';
 
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+
 const ContractAbi = require('../../../../smart-contract/artifacts/contracts/' + CollectionConfig.contractName + '.sol/' + CollectionConfig.contractName + '.json').abi;
 
 interface Props {
@@ -149,110 +151,116 @@ export default class Dapp extends React.Component<Props, State> {
 
   render() {
     return (
-      <>
-        {this.isNotMainnet() ?
-          <div className="not-mainnet">
-            You are not connected to the main network.
-            <span className="small">Current network: <strong>{this.state.network?.name}</strong></span>
-          </div>
-          : null}
-
-        {this.state.errorMessage ? <div className="error"><p>{this.state.errorMessage}</p><button onClick={() => this.setError()}>Close</button></div> : null}
-
-
-        <div className="no-wallet">
-          <div className="use-block-explorer">
-            <strong>The FryHeads are charitable NFTs. 50% of the mint price and secondary sales fees go to the charity of your choice, in perpetuity.</strong><br /><br />
-            You need to be on the Ethereum blockchain and have ETH tokens to buy your FryHeads. <br /><br /> MoonPay can help you buy ETH easily <a href="https://www.moonpay.com/buy/eth" target="_blank">here</a>.<br /><br />
-            Transfer your ETH to your Metamask wallet, connect it to this page by clicking the "Connect Wallet" button below and mint your first FryHeads!
-          </div>
-          <br />
-          <button className="primary" onClick={() => window.open('https://twitter.com/FryHeadsNFT', '_blank', 'noopener,noreferrer')}>Contact us on Twitter</button>
-
-          {!this.isWalletConnected() ? <button className="primary" disabled={this.provider === undefined} onClick={() => this.connectWallet()}>Connect Wallet</button> : null}
-          {/* <hr /> */}
-
-          {/* {!this.isWalletConnected() || this.state.isWhitelistMintEnabled ?
-            <div className="merkle-proof-manual-address">
-              <h2>Whitelist Proof</h2>
-              <p>
-                Anyone can generate the proof using any public address in the list, but <strong>only the owner of that address</strong> will be able to make a successful transaction by using it.
-              </p>
-
-              {this.state.merkleProofManualAddressFeedbackMessage ? <div className="feedback-message">{this.state.merkleProofManualAddressFeedbackMessage}</div> : null}
-
-              <label htmlFor="merkle-proof-manual-address">Public address:</label>
-              <input id="merkle-proof-manual-address" type="text" placeholder="0x000..." disabled={this.state.userAddress !== null} value={this.state.userAddress ?? this.state.merkleProofManualAddress} ref={(input) => this.merkleProofManualAddressInput = input!} onChange={() => {this.setState({merkleProofManualAddress: this.merkleProofManualAddressInput.value})}} /> <button onClick={() => this.copyMerkleProofToClipboard()}>Generate and copy to clipboard</button>
-            </div>
-            : null} */}
-        </div>
-{/* 
-        <div className="contact-us">
-          <span>Contact us on <a href="https://twitter.com/FryHeadsNFT" target="_blank">Twitter</a></span>
-        </div> */}
-
-        {this.isWalletConnected() ?
+      <WagmiConfig client={wagmiClient}>
+        <RainbowKitProvider chains={chains}>
           <>
-            {this.isContractReady() ?
+            {this.isNotMainnet() ?
+              <div className="not-mainnet">
+                You are not connected to the main network.
+                <span className="small">Current network: <strong>{this.state.network?.name}</strong></span>
+              </div>
+              : null}
+
+            {this.state.errorMessage ? <div className="error"><p>{this.state.errorMessage}</p><button onClick={() => this.setError()}>Close</button></div> : null}
+
+            <div className="no-wallet">
+              <button className="primary" onClick={() => window.open('https://twitter.com/FryHeadsNFT', '_blank', 'noopener,noreferrer')}>Contact us on Twitter</button>
+            </div>
+
+            <div className="no-wallet">
+              <div className="use-block-explorer">
+                <strong>The Fry Heads are charitable NFTs. 50% of the mint price and secondary sales fees go to the charity of your choice, in perpetuity.</strong><br /><br />
+                You need to be on the Ethereum blockchain and have ETH tokens to mint your FryHeads. <br /><br /> MoonPay can help you buy ETH easily <a href="https://www.moonpay.com/buy/eth" target="_blank">here</a>.<br /><br />
+                Transfer your ETH to your wallet, connect it to this page by clicking the "Connect Wallet" and mint your first Fry Heads!
+              </div>
+              <br />
+              {!this.isWalletConnected() ? <ConnectButton /> : null}
+              {/* <button className="primary" disabled={this.provider === undefined} onClick={() => this.connectWallet()}>Connect Wallet</button> */}
+              {/* <hr /> */}
+
+              {/* {!this.isWalletConnected() || this.state.isWhitelistMintEnabled ?
+                <div className="merkle-proof-manual-address">
+                  <h2>Whitelist Proof</h2>
+                  <p>
+                    Anyone can generate the proof using any public address in the list, but <strong>only the owner of that address</strong> will be able to make a successful transaction by using it.
+                  </p>
+
+                  {this.state.merkleProofManualAddressFeedbackMessage ? <div className="feedback-message">{this.state.merkleProofManualAddressFeedbackMessage}</div> : null}
+
+                  <label htmlFor="merkle-proof-manual-address">Public address:</label>
+                  <input id="merkle-proof-manual-address" type="text" placeholder="0x000..." disabled={this.state.userAddress !== null} value={this.state.userAddress ?? this.state.merkleProofManualAddress} ref={(input) => this.merkleProofManualAddressInput = input!} onChange={() => {this.setState({merkleProofManualAddress: this.merkleProofManualAddressInput.value})}} /> <button onClick={() => this.copyMerkleProofToClipboard()}>Generate and copy to clipboard</button>
+                </div>
+                : null} */}
+            </div>
+    {/* 
+            <div className="contact-us">
+              <span>Contact us on <a href="https://twitter.com/FryHeadsNFT" target="_blank">Twitter</a></span>
+            </div> */}
+
+            {this.isWalletConnected() ?
               <>
+                {this.isContractReady() ?
+                  <>
 
-                <CollectionStatus
-                  userAddress={this.state.userAddress}
-                  contractAddress={this.state.contractAddress}
-                  maxSupply={this.state.maxSupply}
-                  totalSupply={this.state.totalSupply}
-                  isPaused={this.state.isPaused}
-                  isWhitelistMintEnabled={this.state.isWhitelistMintEnabled}
-                  isUserInWhitelist={this.state.isUserInWhitelist}
-                />
-                {this.state.totalSupply < this.state.maxSupply ?
-                  <MintWidget
-                    networkConfig={this.state.networkConfig}
-                    maxSupply={this.state.maxSupply}
-                    totalSupply={this.state.totalSupply}
-                    tokenPrice={this.state.tokenPrice}
-                    maxMintAmountPerTx={this.state.maxMintAmountPerTx}
-                    isPaused={this.state.isPaused}
-                    isWhitelistMintEnabled={this.state.isWhitelistMintEnabled}
-                    isUserInWhitelist={this.state.isUserInWhitelist}
-                    mintTokens={(mintAmount, charityId) => this.mintTokens(mintAmount, charityId)}
-                    whitelistMintTokens={(mintAmount, charityId) => this.whitelistMintTokens(mintAmount, charityId)}
-                    charities={this.state.charities}
-                  />
+                    <CollectionStatus
+                      userAddress={this.state.userAddress}
+                      contractAddress={this.state.contractAddress}
+                      maxSupply={this.state.maxSupply}
+                      totalSupply={this.state.totalSupply}
+                      isPaused={this.state.isPaused}
+                      isWhitelistMintEnabled={this.state.isWhitelistMintEnabled}
+                      isUserInWhitelist={this.state.isUserInWhitelist}
+                    />
+                    {this.state.totalSupply < this.state.maxSupply ?
+                      <MintWidget
+                        networkConfig={this.state.networkConfig}
+                        maxSupply={this.state.maxSupply}
+                        totalSupply={this.state.totalSupply}
+                        tokenPrice={this.state.tokenPrice}
+                        maxMintAmountPerTx={this.state.maxMintAmountPerTx}
+                        isPaused={this.state.isPaused}
+                        isWhitelistMintEnabled={this.state.isWhitelistMintEnabled}
+                        isUserInWhitelist={this.state.isUserInWhitelist}
+                        mintTokens={(mintAmount, charityId) => this.mintTokens(mintAmount, charityId)}
+                        whitelistMintTokens={(mintAmount, charityId) => this.whitelistMintTokens(mintAmount, charityId)}
+                        charities={this.state.charities}
+                      />
+                      :
+                      <div className="collection-sold-out">
+                        <h2>Tokens have been <strong>sold out</strong>! <span className="emoji">🥳</span></h2>
+
+                        You can buy from our beloved holders on <a href={this.generateMarketplaceUrl()} target="_blank">{CollectionConfig.marketplaceConfig.name}</a>.
+                      </div>
+                    }
+                    <div className="footer">
+                      <div>
+                        <small>Verify the transaction on <a href="https://etherscan.io/">etherscan.io</a>. You will find your NFT in your wallet once the transaction is confirmed.</small>
+                      </div>
+                      <hr />
+                      <div>
+                      <small>
+                        To know which charity your NFT supports you can use the <strong>tokenCharity(token_id)</strong> contract function to get the charity ID associated with it. 
+                        Then you can use the <strong>charities(charity_id)</strong> contract function to get the charity detailed information. 
+                        You can run those functions directly from <a href="https://etherscan.io/">etherscan.io</a>.
+                      </small>
+                      </div>
+                    </div>
+                  </>
                   :
-                  <div className="collection-sold-out">
-                    <h2>Tokens have been <strong>sold out</strong>! <span className="emoji">🥳</span></h2>
+                  <div className="collection-not-ready">
+                    <svg className="spinner" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
 
-                    You can buy from our beloved holders on <a href={this.generateMarketplaceUrl()} target="_blank">{CollectionConfig.marketplaceConfig.name}</a>.
+                    Loading collection data...
                   </div>
                 }
-                <div className="footer">
-                  <div>
-                    <small>Verify the transaction on <a href="https://etherscan.io/">etherscan.io</a>. You will find your NFT in your wallet once the transaction is confirmed.</small>
-                  </div>
-                  <hr />
-                  <div>
-                  <small>
-                    To know which charity your NFT supports you can use the <strong>tokenCharity(token_id)</strong> contract function to get the charity ID associated with it. 
-                    Then you can use the <strong>charities(charity_id)</strong> contract function to get the charity detailed information. 
-                    You can run those functions directly from <a href="https://etherscan.io/">etherscan.io</a>.
-                  </small>
-                  </div>
-                </div>
               </>
-              :
-              <div className="collection-not-ready">
-                <svg className="spinner" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-
-                Loading collection data...
-              </div>
-            }
+            : null}
           </>
-        : null}
-      </>
+        </RainbowKitProvider>
+      </WagmiConfig>
     );
   }
 

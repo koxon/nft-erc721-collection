@@ -13,7 +13,7 @@
         "autoprefixer": "^10.4.0",
         "buffer": "^6.0.3",
         "core-js": "^3.0.0",
-        "ethers": "^5.5.3",
+        "ethers": "^5.7.2",
         "file-loader": "^6.0.0",
         "hardhat-typechain": "^0.3.5",
         "keccak256": "^1.0.6",
@@ -38,6 +38,8 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "html-react-parser": "^1.4.12"
+        "@rainbow-me/rainbowkit": "^0.8.0",
+        "html-react-parser": "^1.4.12",
+        "wagmi": "^0.8.5"
     }
 }

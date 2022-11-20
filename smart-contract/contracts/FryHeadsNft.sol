@@ -6,8 +6,10 @@ import 'erc721a/contracts/ERC721A.sol';
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/utils/cryptography/MerkleProof.sol';
 import '@openzeppelin/contracts/security/ReentrancyGuard.sol';
+import "@openzeppelin/contracts/utils/Strings.sol";
+import {DefaultOperatorFilterer} from "./DefaultOperatorFilterer.sol";
 
-contract FryHeadsNft is ERC721A, Ownable, ReentrancyGuard {
+contract FryHeadsNft is ERC721A, DefaultOperatorFilterer, Ownable, ReentrancyGuard {
 
   using Strings for uint256;
 
@@ -168,33 +170,33 @@ contract FryHeadsNft is ERC721A, Ownable, ReentrancyGuard {
     _safeMint(_receiver, _mintAmount);
   }
 
-  function walletOfOwner(address _owner) external view returns (uint256[] memory) {
-    uint256 ownerTokenCount = balanceOf(_owner);
-    uint256[] memory ownedTokenIds = new uint256[](ownerTokenCount);
-    uint256 currentTokenId = _startTokenId();
-    uint256 ownedTokenIndex = 0;
-    address latestOwnerAddress;
+  // function walletOfOwner(address _owner) external view returns (uint256[] memory) {
+  //   uint256 ownerTokenCount = balanceOf(_owner);
+  //   uint256[] memory ownedTokenIds = new uint256[](ownerTokenCount);
+  //   uint256 currentTokenId = _startTokenId();
+  //   uint256 ownedTokenIndex = 0;
+  //   address latestOwnerAddress;
 
-    while (ownedTokenIndex < ownerTokenCount && currentTokenId < _currentIndex) {
-      TokenOwnership memory ownership = _ownerships[currentTokenId];
+  //   while (ownedTokenIndex < ownerTokenCount && currentTokenId < _currentIndex) {
+  //     TokenOwnership memory ownership = _ownerships[currentTokenId];
 
-      if (!ownership.burned) {
-        if (ownership.addr != address(0)) {
-          latestOwnerAddress = ownership.addr;
-        }
+  //     if (!ownership.burned) {
+  //       if (ownership.addr != address(0)) {
+  //         latestOwnerAddress = ownership.addr;
+  //       }
 
-        if (latestOwnerAddress == _owner) {
-          ownedTokenIds[ownedTokenIndex] = currentTokenId;
+  //       if (latestOwnerAddress == _owner) {
+  //         ownedTokenIds[ownedTokenIndex] = currentTokenId;
 
-          ownedTokenIndex++;
-        }
-      }
+  //         ownedTokenIndex++;
+  //       }
+  //     }
 
-      currentTokenId++;
-    }
+  //     currentTokenId++;
+  //   }
 
-    return ownedTokenIds;
-  }
+  //   return ownedTokenIds;
+  // }
 
   function _startTokenId() internal view virtual override returns (uint256) {
     return 1;
@@ -287,5 +289,30 @@ contract FryHeadsNft is ERC721A, Ownable, ReentrancyGuard {
 
   function _baseURI() internal view virtual override returns (string memory) {
     return uriPrefix;
+  }
+
+  function setApprovalForAll(address operator, bool approved) public override onlyAllowedOperatorApproval(operator) {
+      super.setApprovalForAll(operator, approved);
+  }
+
+  function approve(address operator, uint256 tokenId) public payable override onlyAllowedOperatorApproval(operator) {
+      super.approve(operator, tokenId);
+  }
+
+  function transferFrom(address from, address to, uint256 tokenId) public payable override onlyAllowedOperator(from) {
+      super.transferFrom(from, to, tokenId);
+  }
+
+  function safeTransferFrom(address from, address to, uint256 tokenId) public payable override onlyAllowedOperator(from) {
+      super.safeTransferFrom(from, to, tokenId);
+  }
+
+  function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory data)
+      public
+      payable
+      override
+      onlyAllowedOperator(from)
+  {
+      super.safeTransferFrom(from, to, tokenId, data);
   }
 }
