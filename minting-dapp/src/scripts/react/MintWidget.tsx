@@ -104,20 +104,22 @@ export default class MintWidget extends React.Component<Props, State> {
                 <img src={"/build/images/previews/" + this.getRandomArbitrary(1, 70).toString() + ".png"} alt="Collection preview" />
                 <span><small>preview</small></span>
               </div> */}
-            
-              <div className="price">
-                <strong>Total price:</strong> {utils.formatEther(this.props.tokenPrice.mul(this.state.mintAmount))} {this.props.networkConfig.symbol}
-              </div>
-
+        
               <div className="charity-select">
-                <div className="charity-label">50% of all proceeds will automatically be sent out to the <a href="https://thegivingblock.com/donate/" target="_blank">Giving Block</a> charity fund of your choice in perpetuity. Please select one below.</div>
+                <h1 className="generic-title">Please select a charity below</h1>
                 <div className="charity-grid-container">
                   {charityDivs}
                 </div>
-                <div className="charity-desc">
-                  {(this.state.charityId == -1)?null:parse(this.props.charities[this.state.charityId].description)}
-                </div>
+                {(this.state.charityId == -1) ? null :
+                  <div className="charity-desc">
+                    {parse(this.props.charities[this.state.charityId].description)}
+                  </div>
+                }
                 {/* <div className="charity-label">Select the amount of Fry Heads NFTs you want to mint then click "Mint".</div> */}
+              </div>
+              
+              <div className="price">
+                <strong>Total price:</strong> {utils.formatEther(this.props.tokenPrice.mul(this.state.mintAmount))} {this.props.networkConfig.symbol}
               </div>
 
               <div className="controls">

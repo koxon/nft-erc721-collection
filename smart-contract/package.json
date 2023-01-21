@@ -61,6 +61,7 @@
   },
   "dependencies": {
     "@openzeppelin/contracts": "4.8.0",
+    "canonical-weth": "^1.4.0",
     "ds-test": "https://github.com/dapphub/ds-test.git",
     "dstest": "^1.0.0"
   }

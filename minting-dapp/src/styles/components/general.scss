@@ -9,7 +9,7 @@ body {
 
   // Fullscreen background image example
   background-color: rgb(155, 0, 0);
-  background-image: url('../../images/background.png');
+  background-image: url('../../images/background.jpg');
   @apply bg-center bg-cover bg-fixed;
 }
 
@@ -21,6 +21,10 @@ a, a:link, a:visited {
     @apply underline;
     @apply text-links-hover_txt;
   }
+}
+
+hr {
+  @apply my-4;
 }
 
 strong {
@@ -35,6 +39,8 @@ main {
   @apply m-auto;
   @apply w-full;
   @apply max-w-md;
+  @apply border-8;
+  @apply border-black;
 }
 
 span.emoji {

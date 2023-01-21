@@ -9,7 +9,7 @@ import CollectionStatus from './CollectionStatus';
 import MintWidget from './MintWidget';
 import Whitelist from '../lib/Whitelist';
 
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+// import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 const ContractAbi = require('../../../../smart-contract/artifacts/contracts/' + CollectionConfig.contractName + '.sol/' + CollectionConfig.contractName + '.json').abi;
 
@@ -151,8 +151,6 @@ export default class Dapp extends React.Component<Props, State> {
 
   render() {
     return (
-      <WagmiConfig client={wagmiClient}>
-        <RainbowKitProvider chains={chains}>
           <>
             {this.isNotMainnet() ?
               <div className="not-mainnet">
@@ -163,19 +161,42 @@ export default class Dapp extends React.Component<Props, State> {
 
             {this.state.errorMessage ? <div className="error"><p>{this.state.errorMessage}</p><button onClick={() => this.setError()}>Close</button></div> : null}
 
-            <div className="no-wallet">
-              <button className="primary" onClick={() => window.open('https://twitter.com/FryHeadsNFT', '_blank', 'noopener,noreferrer')}>Contact us on Twitter</button>
-            </div>
+
+
 
             <div className="no-wallet">
               <div className="use-block-explorer">
-                <strong>The Fry Heads are charitable NFTs. 50% of the mint price and secondary sales fees go to the charity of your choice, in perpetuity.</strong><br /><br />
-                You need to be on the Ethereum blockchain and have ETH tokens to mint your FryHeads. <br /><br /> MoonPay can help you buy ETH easily <a href="https://www.moonpay.com/buy/eth" target="_blank">here</a>.<br /><br />
-                Transfer your ETH to your wallet, connect it to this page by clicking the "Connect Wallet" and mint your first Fry Heads!
+                <h1 className="intro-title">The Fry Heads are charitable NFTs</h1> 
+                <strong>50% of the mint price and secondary sales fees are sent to 
+                  <a href="https://thegivingblock.com/" target="_blank"> The Giving Block</a>, in perpetuity. 
+                </strong>
               </div>
-              <br />
-              {!this.isWalletConnected() ? <ConnectButton /> : null}
-              {/* <button className="primary" disabled={this.provider === undefined} onClick={() => this.connectWallet()}>Connect Wallet</button> */}
+            </div>
+
+            { !this.isWalletConnected() ? 
+              <div className="no-wallet">
+                  You need to be on the Ethereum blockchain and have ETH tokens to mint your Fry Heads. <br /><br />
+                  Transfer your ETH to your wallet, connect it to this page by clicking the "Connect Wallet" bellow and mint your first Fry Heads!
+              </div> 
+             : null }
+            
+            {/* <div className="no-wallet"> */}
+              {/* <ConnectButton chainStatus="icon" 
+                accountStatus={{smallScreen: 'avatar', largeScreen: 'full'}} 
+                showBalance={{smallScreen: false, largeScreen: true}}
+                /> */}
+
+              {
+              !this.isWalletConnected() ? 
+              
+              <div className="no-wallet">
+                <button className="primary" disabled={this.provider === undefined} onClick={() => this.connectWallet()}>Connect Wallet</button> 
+              </div>
+              : 
+              null
+              
+              }
+              
               {/* <hr /> */}
 
               {/* {!this.isWalletConnected() || this.state.isWhitelistMintEnabled ?
@@ -191,7 +212,15 @@ export default class Dapp extends React.Component<Props, State> {
                   <input id="merkle-proof-manual-address" type="text" placeholder="0x000..." disabled={this.state.userAddress !== null} value={this.state.userAddress ?? this.state.merkleProofManualAddress} ref={(input) => this.merkleProofManualAddressInput = input!} onChange={() => {this.setState({merkleProofManualAddress: this.merkleProofManualAddressInput.value})}} /> <button onClick={() => this.copyMerkleProofToClipboard()}>Generate and copy to clipboard</button>
                 </div>
                 : null} */}
+            {/* </div> */}
+
+            <div className="no-wallet">
+              <button className="primary" onClick={() => window.open('https://twitter.com/FryHeadsNFT', '_blank', 'noopener,noreferrer')}>Contact us on Twitter</button>
+              <br></br>
+              <button className="primary" onClick={() => window.open('https://opensea.io/collection/fryheadsnft', '_blank', 'noopener,noreferrer')}>Opensea collection</button>
             </div>
+
+
     {/* 
             <div className="contact-us">
               <span>Contact us on <a href="https://twitter.com/FryHeadsNFT" target="_blank">Twitter</a></span>
@@ -238,11 +267,18 @@ export default class Dapp extends React.Component<Props, State> {
                       </div>
                       <hr />
                       <div>
-                      <small>
-                        To know which charity your NFT supports you can use the <strong>tokenCharity(token_id)</strong> contract function to get the charity ID associated with it. 
-                        Then you can use the <strong>charities(charity_id)</strong> contract function to get the charity detailed information. 
-                        You can run those functions directly from <a href="https://etherscan.io/">etherscan.io</a>.
-                      </small>
+                        <small>
+                          To know which charity your NFT supports you can use the <strong>tokenCharity(token_id)</strong> contract function to get the charity ID associated with it. 
+                          Then you can use the <strong>charities(charity_id)</strong> contract function to get the charity detailed information. 
+                          You can run those functions directly from <a href="https://etherscan.io/">etherscan.io</a>.
+                        </small>
+                      </div>
+                      <hr />
+                      <div>
+                        <small>
+                          Anyone can trigger the distribution of funds to the charities. Go to the smart contract on <a href={'https://etherscan.io/address/' + this.state.contractAddress} target="_blank">etherscan.io</a>, 
+                          in the "Contract" tab, under "Write Contract", scroll down and execute the "withdraw" method. If there are any WETH tokens in the contract, execute "withdrawETH" method first to transform them into ETH.
+                        </small>
                       </div>
                     </div>
                   </>
@@ -259,8 +295,6 @@ export default class Dapp extends React.Component<Props, State> {
               </>
             : null}
           </>
-        </RainbowKitProvider>
-      </WagmiConfig>
     );
   }
 

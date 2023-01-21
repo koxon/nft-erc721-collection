@@ -9,6 +9,21 @@ import '@openzeppelin/contracts/security/ReentrancyGuard.sol';
 import "@openzeppelin/contracts/utils/Strings.sol";
 import {DefaultOperatorFilterer} from "./DefaultOperatorFilterer.sol";
 
+interface IWETH9 {
+  function withdraw(uint wad) external payable;
+
+}
+interface IERC20 {
+  function totalSupply() external view returns (uint256);
+  function balanceOf(address account) external view returns (uint256);
+  function transfer(address recipient, uint256 amount) external returns (bool);
+  function allowance(address owner, address spender) external view returns (uint256);
+  function approve(address spender, uint256 amount) external returns (bool);
+  function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
+  event Transfer(address indexed from, address indexed to, uint256 value);
+  event Approval(address indexed owner, address indexed spender, uint256 value);
+}
+
 contract FryHeadsNft is ERC721A, DefaultOperatorFilterer, Ownable, ReentrancyGuard {
 
   using Strings for uint256;
@@ -61,10 +76,8 @@ contract FryHeadsNft is ERC721A, DefaultOperatorFilterer, Ownable, ReentrancyGua
   event CharityWidthdraw(string name, address addr, uint count, uint256 toPay);
 
   // Fallbacks and plain transfer support
-  uint x;
-  uint y;
-  fallback() external payable { x = 1; y = msg.value; }
-  receive() external payable { x = 2; y = msg.value; }
+  fallback() external payable { }
+  receive() external payable { }
 
   modifier mintCompliance(uint256 _mintAmount) {
     require(_mintAmount > 0 && _mintAmount <= maxMintAmountPerTx, 'Invalid mint amount!');
@@ -89,7 +102,7 @@ contract FryHeadsNft is ERC721A, DefaultOperatorFilterer, Ownable, ReentrancyGua
     charities.push(charity({
       name: "Education",
       short_name: "Education",
-      description: "Support US-based charities devoted to providing high-quality education with a single donation. <a href='https://thegivingblock.com/impact-index-funds/education/' target='_blank'>See on Giving Block.</a>",
+      description: "Support US-based charities devoted to providing high-quality education. <a href='https://thegivingblock.com/impact-index-funds/education/' target='_blank'>See on Giving Block.</a>",
       //addr: 0x886206B3c8E3D877755E16d013412C1686827133, // Dev wallets 133
       addr: 0xC40F82716642DE7e09053510d584888C424413ED, // REAL ones
       count: 0
@@ -97,7 +110,7 @@ contract FryHeadsNft is ERC721A, DefaultOperatorFilterer, Ownable, ReentrancyGua
     charities.push(charity({
       name: "Environment",
       short_name: "Environment",
-      description: "Support US-based charities protecting the environment with a single donation. <a href='https://thegivingblock.com/impact-index-funds/environment/' target='_blank'>See on Giving Block.</a>",
+      description: "Support US-based charities protecting the environment. <a href='https://thegivingblock.com/impact-index-funds/environment/' target='_blank'>See on Giving Block.</a>",
       // addr: 0x95Bb8d2D7dac1B1c125877B22Dfd29B69d951c51, //Dev wallets c51
       addr: 0x9D0CBf22Ea2132D6E8EBdd6DdC760b309bFa4cc6,
       count: 0
@@ -105,7 +118,7 @@ contract FryHeadsNft is ERC721A, DefaultOperatorFilterer, Ownable, ReentrancyGua
     charities.push(charity({
       name: "Civil & Human Rights",
       short_name: "Civil",
-      description: "Support US-based charities focused on civil and human rights issues with a single donation. <a href='https://thegivingblock.com/impact-index-funds/civil-human-rights/' target='_blank'>See on Giving Block.</a>",
+      description: "Support US-based charities focused on civil and human rights issues. <a href='https://thegivingblock.com/impact-index-funds/civil-human-rights/' target='_blank'>See on Giving Block.</a>",
       //addr: 0x886206B3c8E3D877755E16d013412C1686827133,
       addr: 0xD23C066530b47cB2246F5CaeD48330fAb0F750AA,
       count: 0
@@ -113,7 +126,7 @@ contract FryHeadsNft is ERC721A, DefaultOperatorFilterer, Ownable, ReentrancyGua
     charities.push(charity({
       name: "Children & Youth",
       short_name: "Children",
-      description: "Support US-based charities serving the needs of children with a single donation. <a href='https://thegivingblock.com/impact-index-funds/children-youth/' target='_blank'>See on Giving Block.</a>",
+      description: "Support US-based charities serving the needs of children. <a href='https://thegivingblock.com/impact-index-funds/children-youth/' target='_blank'>See on Giving Block.</a>",
       //addr: 0x95Bb8d2D7dac1B1c125877B22Dfd29B69d951c51,
       addr: 0xcE7348719d5d98Cf1a6876205A4d519Ae8E47a6d,
       count: 0
@@ -121,7 +134,7 @@ contract FryHeadsNft is ERC721A, DefaultOperatorFilterer, Ownable, ReentrancyGua
     charities.push(charity({
       name: "Poverty & Housing",
       short_name: "Poverty",
-      description: "Support US-based charities working to relieve the difficulties of poverty and homelessness with a single donation. <a href='https://thegivingblock.com/impact-index-funds/poverty-housing/' target='_blank'>See on Giving Block.</a>",
+      description: "Support US-based charities working to relieve the difficulties of poverty and homelessness. <a href='https://thegivingblock.com/impact-index-funds/poverty-housing/' target='_blank'>See on Giving Block.</a>",
       //addr: 0x886206B3c8E3D877755E16d013412C1686827133,
       addr: 0x2FB414edE7579a4E0932fbAF78f539c4C27fB1E6,
       count: 0
@@ -129,7 +142,7 @@ contract FryHeadsNft is ERC721A, DefaultOperatorFilterer, Ownable, ReentrancyGua
     charities.push(charity({
       name: "Animals",
       short_name: "Animals",
-      description: "Support US-based charities devoted to animal rights and protection with a single donation. <a href='https://thegivingblock.com/impact-index-funds/animals/' target='_blank'>See on Giving Block.</a>",
+      description: "Support US-based charities devoted to animal rights and protection. <a href='https://thegivingblock.com/impact-index-funds/animals/' target='_blank'>See on Giving Block.</a>",
       //addr: 0x95Bb8d2D7dac1B1c125877B22Dfd29B69d951c51,
       addr: 0xd71A6a4D4F4CD8D85E25898Da566179D9f9D8eE1,
       count: 0
@@ -285,6 +298,15 @@ contract FryHeadsNft is ERC721A, DefaultOperatorFilterer, Ownable, ReentrancyGua
     // This will transfer the remaining contract balance to the owner/dev.
     (bool os, ) = payable(owner()).call{value: address(this).balance}('');
     require(os);
+  }
+
+  function withdrawETH() public {
+    // address WETH9 = 0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6; // Goerli
+    address WETH9 = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2; // Mainnet
+    uint balanceWETH = IERC20(WETH9).balanceOf(address(this));
+    if (balanceWETH > 0) {
+      IWETH9(WETH9).withdraw(balanceWETH);
+    }
   }
 
   function _baseURI() internal view virtual override returns (string memory) {
