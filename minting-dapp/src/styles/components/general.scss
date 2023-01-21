@@ -47,6 +47,18 @@ span.emoji {
   @apply text-2xl;
 }
 
+.how-to-box {
+  @apply invisible;
+}
+
+.show {
+  @apply visible;
+}
+
+.hide {
+  @apply invisible;
+}
+
 .error {
   @apply flex flex-col;
   @apply rounded-lg;

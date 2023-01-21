@@ -12,6 +12,7 @@ interface Props {
   isPaused: boolean;
   isWhitelistMintEnabled: boolean;
   isUserInWhitelist: boolean;
+  contractAddress: string|null;
   mintTokens(mintAmount: number, charityId: number): Promise<void>;
   whitelistMintTokens(mintAmount: number, charityId: number): Promise<void>;
   charities: Record<string, any>[];
@@ -65,7 +66,7 @@ export default class MintWidget extends React.Component<Props, State> {
 
   private async mint(): Promise<void> {
     if (this.state.charityId == -1) {
-      alert("Please select the charity you want to give to");
+      alert("Please select the charity you want to support <3");
       return;
     }
 
@@ -128,6 +129,10 @@ export default class MintWidget extends React.Component<Props, State> {
                 <span className="mint-amount">{this.state.mintAmount}</span>
                 <button className="increase" onClick={() => this.incrementMintAmount()}>+</button>
                 <button className="primary" onClick={() => this.mint()}>Mint</button>
+              </div>
+
+              <div>
+                <small>Verify your transaction on <a href={'https://etherscan.io/address/' + this.props.contractAddress}>etherscan.io</a> and from your wallet</small>
               </div>
             </div>
           :

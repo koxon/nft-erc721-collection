@@ -101,6 +101,9 @@
     @apply text-popups-txt text-sm;
     @apply bg-popups-bg;
     @apply shadow;
+    
+    @apply border-8;
+    @apply border-black;
 
     .spinner {
       @apply inline;
@@ -164,14 +167,14 @@
     .user-address {
       @apply sm:col-span-2;
       @apply overflow-hidden;
-      @apply font-semibold;
+      // @apply font-semibold;
 
       @apply border-b border-popups-internal_border;
 
       .address {
         @apply w-full;
         
-        @apply font-semibold;
+        // @apply font-semibold;
         @apply truncate;
         @apply text-center;
       }
@@ -180,14 +183,14 @@
     .contract-address {
       @apply sm:col-span-2;
       @apply overflow-hidden;
-      @apply font-semibold;
+      // @apply font-semibold;
 
       @apply border-b border-popups-internal_border;
 
       .address {
         @apply w-full;
         
-        @apply font-semibold;
+        // @apply font-semibold;
         @apply truncate;
         @apply text-center;
       }

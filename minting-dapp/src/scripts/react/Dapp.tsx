@@ -25,6 +25,7 @@ interface State {
   maxSupply: number;
   maxMintAmountPerTx: number;
   tokenPrice: BigNumber;
+  showHowTo: boolean,
   isPaused: boolean;
   isWhitelistMintEnabled: boolean;
   isUserInWhitelist: boolean;
@@ -43,6 +44,7 @@ const defaultState: State = {
   maxSupply: 0,
   maxMintAmountPerTx: 0,
   tokenPrice: BigNumber.from(0),
+  showHowTo: false,
   isPaused: true,
   isWhitelistMintEnabled: false,
   isUserInWhitelist: false,
@@ -250,6 +252,7 @@ export default class Dapp extends React.Component<Props, State> {
                         isPaused={this.state.isPaused}
                         isWhitelistMintEnabled={this.state.isWhitelistMintEnabled}
                         isUserInWhitelist={this.state.isUserInWhitelist}
+                        contractAddress={this.state.contractAddress}
                         mintTokens={(mintAmount, charityId) => this.mintTokens(mintAmount, charityId)}
                         whitelistMintTokens={(mintAmount, charityId) => this.whitelistMintTokens(mintAmount, charityId)}
                         charities={this.state.charities}
@@ -261,24 +264,26 @@ export default class Dapp extends React.Component<Props, State> {
                         You can buy from our beloved holders on <a href={this.generateMarketplaceUrl()} target="_blank">{CollectionConfig.marketplaceConfig.name}</a>.
                       </div>
                     }
+
                     <div className="footer">
                       <div>
-                        <small>Verify the transaction on <a href="https://etherscan.io/">etherscan.io</a>. You will find your NFT in your wallet once the transaction is confirmed.</small>
+                          <h1 className="generic-title">Anyone can trigger the distribution of funds to charities</h1>
+                          <div>
+                            {/* <div className={this.state.showHowto ? 'show' : undefined}><a onClick={() => {this.state.showHowTo = !this.state.showHowTo}}>How-To</a></div> */}
+                            {/* <div className='how-to-box'> */}
+                            <div>
+                              Execute the "withdraw" method of smart contract on <a href={'https://etherscan.io/address/' + this.state.contractAddress} target="_blank">etherscan.io</a>. 
+                              If there are any WETH tokens in the contract, execute the "withdrawETH" method first to transform them into ETH.
+                            </div>
+                          </div>
                       </div>
-                      <hr />
+                    </div>
+
+                    <div className="footer">
                       <div>
-                        <small>
                           To know which charity your NFT supports you can use the <strong>tokenCharity(token_id)</strong> contract function to get the charity ID associated with it. 
                           Then you can use the <strong>charities(charity_id)</strong> contract function to get the charity detailed information. 
                           You can run those functions directly from <a href="https://etherscan.io/">etherscan.io</a>.
-                        </small>
-                      </div>
-                      <hr />
-                      <div>
-                        <small>
-                          Anyone can trigger the distribution of funds to the charities. Go to the smart contract on <a href={'https://etherscan.io/address/' + this.state.contractAddress} target="_blank">etherscan.io</a>, 
-                          in the "Contract" tab, under "Write Contract", scroll down and execute the "withdraw" method. If there are any WETH tokens in the contract, execute the "withdrawETH" method first to transform them into ETH.
-                        </small>
                       </div>
                     </div>
                   </>
