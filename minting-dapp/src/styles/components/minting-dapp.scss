@@ -6,9 +6,12 @@
 
   .intro-title {
     @apply text-2xl;
-    @apply text-center;
     @apply font-bold;
     @apply mb-3;
+  }
+
+  .intro-title-box {
+    @apply mr-14;
   }
 
   .generic-title {
@@ -18,7 +21,16 @@
     @apply my-3;
   }
 
+  .angel-fryhead-img {
+    @apply absolute bottom-0 right-1;
+  }
+
+  .mustach-fryhead-img {
+    @apply absolute bottom-0 left-10;
+  }
+
   .no-wallet {
+    @apply relative;
     @apply flex flex-col;
     @apply px-4 py-6;
     @apply rounded-lg;
@@ -296,7 +308,9 @@
     }
 
     .price {
-      @apply px-6 py-4;
+      @apply relative;
+      @apply px-6 py-6;
+      @apply text-xl;
     }
 
     & > * {

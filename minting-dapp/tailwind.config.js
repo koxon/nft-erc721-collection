@@ -47,11 +47,11 @@ module.exports = {
         },
         btn_primary: {
           txt: colors.black,
-          bg: "#fbd329",
+          bg: "#ffd47e",
           border: "#fa0601",
           hover_txt: colors.white,
-          hover_bg: "#ff6966",
-          hover_border: "#ff6966",
+          hover_bg: "#bc0200",
+          hover_border: "#bc0200",
           down_bg: colors.black
         },
         btn_error: {
@@ -81,9 +81,9 @@ module.exports = {
         // Mint widget
         token_preview: "#ffffff",
         white_label: "#ffffff",
-        charity_desc_color: "#fbd329",
+        charity_desc_color: "#ffd47e",
         charity_color: "#e6e6e6",
-        charity_selected_color: "#fbd329",
+        charity_selected_color: "#ffd47e",
       },
     },
   },

@@ -57,6 +57,9 @@ span.emoji {
   @apply border border-error-border;
   @apply shadow;
 
+  @apply border-8;
+  @apply border-black;
+
   &::before {
     content: 'Error';
 

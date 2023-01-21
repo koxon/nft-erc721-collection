@@ -119,7 +119,8 @@ export default class MintWidget extends React.Component<Props, State> {
               </div>
               
               <div className="price">
-                <strong>Total price:</strong> {utils.formatEther(this.props.tokenPrice.mul(this.state.mintAmount))} {this.props.networkConfig.symbol}
+                <img className="mustach-fryhead-img" src="/build/images/mustach.png" />
+                <small>Price</small><br></br><strong>{utils.formatEther(this.props.tokenPrice.mul(this.state.mintAmount))} {this.props.networkConfig.symbol}</strong>
               </div>
 
               <div className="controls">

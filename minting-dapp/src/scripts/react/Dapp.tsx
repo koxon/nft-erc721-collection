@@ -161,15 +161,15 @@ export default class Dapp extends React.Component<Props, State> {
 
             {this.state.errorMessage ? <div className="error"><p>{this.state.errorMessage}</p><button onClick={() => this.setError()}>Close</button></div> : null}
 
-
-
-
             <div className="no-wallet">
               <div className="use-block-explorer">
-                <h1 className="intro-title">The Fry Heads are charitable NFTs</h1> 
-                <strong>50% of the mint price and secondary sales fees are sent to 
-                  <a href="https://thegivingblock.com/" target="_blank"> The Giving Block</a>, in perpetuity. 
-                </strong>
+                <img className="angel-fryhead-img" src="/build/images/angel.png" />
+                <div className="intro-title-box">
+                  <h1 className="intro-title">Fry Heads are charitable NFTs</h1> 
+                  <strong>50% of the mint price and secondary sales fees are sent to 
+                    <a href="https://thegivingblock.com/" target="_blank"> The Giving Block</a>, in perpetuity. 
+                  </strong>
+                </div>
               </div>
             </div>
 
@@ -277,7 +277,7 @@ export default class Dapp extends React.Component<Props, State> {
                       <div>
                         <small>
                           Anyone can trigger the distribution of funds to the charities. Go to the smart contract on <a href={'https://etherscan.io/address/' + this.state.contractAddress} target="_blank">etherscan.io</a>, 
-                          in the "Contract" tab, under "Write Contract", scroll down and execute the "withdraw" method. If there are any WETH tokens in the contract, execute "withdrawETH" method first to transform them into ETH.
+                          in the "Contract" tab, under "Write Contract", scroll down and execute the "withdraw" method. If there are any WETH tokens in the contract, execute the "withdrawETH" method first to transform them into ETH.
                         </small>
                       </div>
                     </div>
@@ -363,7 +363,7 @@ export default class Dapp extends React.Component<Props, State> {
     } else if (network.chainId === CollectionConfig.testnet.chainId) {
       networkConfig = CollectionConfig.testnet;
     } else {
-      this.setError('Unsupported network!');
+      this.setError('Unsupported network! Please connect to Ethereum.');
 
       return;
     }
