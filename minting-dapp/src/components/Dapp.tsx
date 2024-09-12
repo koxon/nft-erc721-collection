@@ -22,7 +22,7 @@ const Dapp: React.FC = () => {
   const signer = useEthersSigner();
   const isTestnet = useMemo((): boolean => chainId === CollectionConfig.testnet.chainId, [chainId]);
 
-  const { totalSupply, maxSupply, maxMintAmountPerTx, isPaused, tokenPrice, isWhitelistMintEnabled } = useContractDetails({ isTestnet });
+  const { totalSupply, maxSupply, maxMintAmountPerTx, isPaused, tokenPrice, isWhitelistMintEnabled, refetch } = useContractDetails({ isTestnet });
   const { charities } = useCharities({ isTestnet });
 
   // const [merkleProofManualAddress, setMerkleProofManualAddress] = useState<string>("");
@@ -39,6 +39,7 @@ const Dapp: React.FC = () => {
       try {
         const transactionResponse = await colectionContract?.mint(amount, charityId, { value: tokenPrice?.mul(amount) });
         await transactionResponse.wait(1);
+        refetch();
       } catch (e) {
         setErrorMessage((e as Error).message);
         console.log(e);
