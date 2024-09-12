@@ -13,7 +13,8 @@ const CollectionConfig: CollectionConfigInterface = {
   contractName: 'FryHeadsNft',
   tokenName: 'Fry Heads NFT',
   tokenSymbol: 'FRH',
-  hiddenMetadataUri: 'ipfs://QmQRsoxahgqDS99mFQpCRDSPwMg3NAoPddmTJ1WfY9MPc1/hidden.json',
+  hiddenMetadataUri:
+    'ipfs://QmQRsoxahgqDS99mFQpCRDSPwMg3NAoPddmTJ1WfY9MPc1/hidden.json',
   maxSupply: 10000,
   whitelistSale: {
     price: 0.0045, // DEV Price
@@ -27,7 +28,8 @@ const CollectionConfig: CollectionConfigInterface = {
     price: 0.0045, // DEV Price - ~$5
     maxMintAmountPerTx: 100,
   },
-  contractAddress: "0xAF5C905F70378e984346D49833f0EE244f1D3DE1",
+  // contractAddress: '0xAA094947Cdc87788Bd6eC3cb75B2B13d275C9391', // DEV Address Sepolia - Testnet // it is also necessary to update and in /minting-dapp/src/config/collectionConfig.ts
+  contractAddress: '0xAF5C905F70378e984346D49833f0EE244f1D3DE1', // it is also necessary to update and in /minting-dapp/src/config/collectionConfig.ts
   marketplaceIdentifier: 'fryheads-token',
   marketplaceConfig: Marketplaces.openSea,
   whitelistAddresses: whitelistAddresses,
