@@ -34,7 +34,7 @@
     @apply flex flex-col;
     @apply px-4 py-6;
     @apply rounded-lg;
-    
+
     @apply text-popups-txt;
     @apply bg-popups-bg;
     @apply shadow;
@@ -49,7 +49,7 @@
 
       &:not(:first-child)::before {
         content: '';
-        
+
         @apply block;
         @apply mx-auto my-3;
         @apply w-12;
@@ -75,7 +75,7 @@
         @apply rounded-lg;
         @apply mt-4;
         @apply p-3;
-        
+
         @apply text-wl_message-txt text-sm;
         @apply bg-wl_message-bg;
       }
@@ -101,7 +101,7 @@
     @apply text-popups-txt text-sm;
     @apply bg-popups-bg;
     @apply shadow;
-    
+
     @apply border-8;
     @apply border-black;
 
@@ -127,8 +127,9 @@
       }
     }
 
-    .link-about, .link-twitter, .link-discord {
-
+    .link-about,
+    .link-twitter,
+    .link-discord {
       @apply rounded-lg;
 
       .label {
@@ -137,7 +138,8 @@
         @apply font-semibold;
       }
 
-      &.link-about, &.link-twitter {
+      &.link-about,
+      &.link-twitter {
         @apply border-b sm:border-l-0 sm:border-r border-popups-internal_border;
       }
     }
@@ -173,7 +175,7 @@
 
       .address {
         @apply w-full;
-        
+
         // @apply font-semibold;
         @apply truncate;
         @apply text-center;
@@ -189,14 +191,15 @@
 
       .address {
         @apply w-full;
-        
+
         // @apply font-semibold;
         @apply truncate;
         @apply text-center;
       }
     }
 
-    .supply, .current-sale {
+    .supply,
+    .current-sale {
       .label {
         @apply block;
 
@@ -209,7 +212,9 @@
     }
   }
 
-  .cannot-mint, .not-mainnet, .collection-sold-out {
+  .cannot-mint,
+  .not-mainnet,
+  .collection-sold-out {
     @apply rounded-lg;
     @apply px-6 py-4;
 
@@ -228,7 +233,6 @@
       @apply bg-warning-bg;
       @apply border border-warning-border;
 
-
       .small {
         @apply block;
 
@@ -244,7 +248,6 @@
       }
     }
   }
-
 
   .contact-us {
     @apply flex flex-col items-center;
@@ -301,11 +304,11 @@
       @apply p-8;
 
       @apply bg-token_preview;
-      
+
       img {
         @apply m-auto;
         @apply max-h-52;
-        
+
         filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.4));
       }
     }
@@ -325,7 +328,6 @@
     }
 
     .charity-select {
-
       .charity-label {
         @apply bg-charity_desc_color;
         @apply p-3 mb-2;
@@ -345,7 +347,7 @@
           @apply flex flex-col items-center;
           @apply p-2 mb-2 ml-2;
           @apply bg-charity_color;
-    
+
           .label {
             @apply text-xs text-label;
           }
@@ -365,7 +367,8 @@
         @apply border-0;
       }
 
-      .decrease, .mint-amount {
+      .decrease,
+      .mint-amount {
         @apply border-r border-popups-internal_border;
       }
 

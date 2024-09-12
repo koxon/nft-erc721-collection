@@ -9,11 +9,13 @@ body {
 
   // Fullscreen background image example
   background-color: rgb(155, 0, 0);
-  background-image: url('../../images/background.jpg');
+  background-image: url('../../assets/background.jpg');
   @apply bg-center bg-cover bg-fixed;
 }
 
-a, a:link, a:visited {
+a,
+a:link,
+a:visited {
   @apply font-semibold;
   @apply text-links-txt;
 
@@ -63,7 +65,7 @@ span.emoji {
   @apply flex flex-col;
   @apply rounded-lg;
   @apply p-3;
-  
+
   @apply text-error-txt text-sm;
   @apply bg-error-bg;
   @apply border border-error-border;
@@ -102,7 +104,7 @@ button {
   @apply py-2 px-6;
 
   @apply rounded-full;
-  
+
   @apply font-semibold;
   @apply text-btn-txt;
   @apply bg-btn-bg;
@@ -145,11 +147,11 @@ button {
   }
 }
 
-input[type=text] {
+input[type='text'] {
   @apply py-2 px-4;
 
   @apply rounded-full;
-  
+
   @apply font-mono font-semibold;
   @apply text-txt_input-txt;
   @apply bg-txt_input-bg;
