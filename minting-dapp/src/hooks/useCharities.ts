@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { colectionContract, colectionContractTest } from "../config/constants";
 
 async function getCharitiesCount(isTestnet: boolean) {
-  const chairities = await (isTestnet ? colectionContractTest : colectionContract).getCharitiesCount().toNumber();
+  const chairities = (await (isTestnet ? colectionContractTest : colectionContract).getCharitiesCount()).toNumber();
   return (Array.from({ length: chairities }, (_, i) => i) as number[]) || [];
 }
 
@@ -12,7 +12,7 @@ async function getContractDetails(charityId: number, isTestnet: boolean) {
 }
 
 export function useCharities({ isTestnet }: { isTestnet: boolean }) {
-  const { data: charitiesCount = [] } = useQuery({
+  const { data: charitiesCount = [], isLoading: isCountLoading } = useQuery({
     queryKey: ["charitiesCount", isTestnet],
     queryFn: async () => await getCharitiesCount(isTestnet),
   });
@@ -27,9 +27,9 @@ export function useCharities({ isTestnet }: { isTestnet: boolean }) {
   return useMemo(() => {
     return {
       charities: charities.map((j) => j?.data),
-      isLoading: charities.some((j) => j.isLoading),
+      isLoading: charities.some((j) => j.isLoading) || isCountLoading,
       isSuccess: charities.every((j) => j.isSuccess && j.data),
       isError: charities.some((j) => j.isError),
     };
-  }, [charities]);
+  }, [charities, isCountLoading]);
 }
