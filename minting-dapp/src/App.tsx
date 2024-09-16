@@ -1,5 +1,6 @@
 import { RainbowKitProvider, darkTheme } from "@rainbow-me/rainbowkit";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { BrowserRouter } from "react-router-dom";
 import { WagmiProvider } from "wagmi";
 import Dapp from "./components/Dapp";
@@ -28,6 +29,7 @@ export default function App() {
             <Dapp />
           </BrowserRouter>
         </RainbowKitProvider>
+        <ReactQueryDevtools />
       </QueryClientProvider>
     </WagmiProvider>
   );
