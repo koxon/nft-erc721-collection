@@ -4,7 +4,7 @@ import MarketplaceConfigInterface from '../lib/MarketplaceConfigInterface';
 interface SaleConfig {
   price: number;
   maxMintAmountPerTx: number;
-};
+}
 
 export default interface CollectionConfigInterface {
   testnet: NetworkConfigInterface;
@@ -17,8 +17,8 @@ export default interface CollectionConfigInterface {
   whitelistSale: SaleConfig;
   preSale: SaleConfig;
   publicSale: SaleConfig;
-  contractAddress: string|null;
+  contractAddress: string | null;
   marketplaceIdentifier: string;
   marketplaceConfig: MarketplaceConfigInterface;
   whitelistAddresses: string[];
-};
+}

@@ -1,10 +1,8 @@
-import '../styles/main.scss';
 // import '@rainbow-me/rainbowkit/styles.css';
 
-import ReactDOM from 'react-dom';
-import Dapp from './react/Dapp';
-import CollectionConfig from '../../../smart-contract/config/CollectionConfig';
-
+import ReactDOM from 'react-dom/client';
+import './index.scss';
+import App from './App';
 
 // import {
 //   getDefaultWallets,
@@ -40,16 +38,22 @@ import CollectionConfig from '../../../smart-contract/config/CollectionConfig';
 //   provider
 // })
 
-if (document.title === '') {
-  document.title = CollectionConfig.tokenName;
-}
+// document.addEventListener('DOMContentLoaded', async () => {
+//   ReactDOM.render(
+//     // <WagmiConfig client={wagmiClient}>
+//     //   <RainbowKitProvider chains={chains}>
+//     <Dapp />,
+//     //   </RainbowKitProvider>
+//     // </WagmiConfig>,
+//     document.getElementById('minting-dapp')
+//   );
+// });
 
-document.addEventListener('DOMContentLoaded', async () => {
-  ReactDOM.render(
-    // <WagmiConfig client={wagmiClient}>
-    //   <RainbowKitProvider chains={chains}>
-        <Dapp />,
-    //   </RainbowKitProvider>
-    // </WagmiConfig>, 
-    document.getElementById('minting-dapp'));
-});
+const root = ReactDOM.createRoot(
+  document.getElementById('minting-dapp') as HTMLElement
+);
+root.render(
+  // <React.StrictMode>
+  <App />
+  // </React.StrictMode>
+);

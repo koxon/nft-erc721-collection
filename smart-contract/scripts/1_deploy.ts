@@ -14,8 +14,12 @@ async function main() {
   console.log('Deploying contract...');
 
   // We get the contract to deploy
-  const Contract = await ethers.getContractFactory(CollectionConfig.contractName);
-  const contract = await Contract.deploy(...ContractArguments) as NftContractType;
+  const Contract = await ethers.getContractFactory(
+    CollectionConfig.contractName
+  );
+  const contract = (await Contract.deploy(
+    ...ContractArguments
+  )) as NftContractType;
 
   await contract.deployed();
 

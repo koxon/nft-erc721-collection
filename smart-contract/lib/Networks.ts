@@ -10,7 +10,7 @@ export const hardhatLocal: NetworkConfigInterface = {
     name: 'Block explorer (not available for local chains)',
     generateContractUrl: (contractAddress: string) => `#`,
   },
-}
+};
 
 /*
  * Ethereum
@@ -20,18 +20,20 @@ export const ethereumTestnet: NetworkConfigInterface = {
   symbol: 'ETH (test)',
   blockExplorer: {
     name: 'Etherscan (Goerli)',
-    generateContractUrl: (contractAddress: string) => `https://goerli.etherscan.io/address/${contractAddress}`,
+    generateContractUrl: (contractAddress: string) =>
+      `https://goerli.etherscan.io/address/${contractAddress}`,
   },
-}
+};
 
 export const ethereumMainnet: NetworkConfigInterface = {
   chainId: 1,
   symbol: 'ETH',
   blockExplorer: {
     name: 'Etherscan',
-    generateContractUrl: (contractAddress: string) => `https://etherscan.io/address/${contractAddress}`,
+    generateContractUrl: (contractAddress: string) =>
+      `https://etherscan.io/address/${contractAddress}`,
   },
-}
+};
 
 /*
  * Polygon
@@ -41,15 +43,17 @@ export const polygonTestnet: NetworkConfigInterface = {
   symbol: 'MATIC (test)',
   blockExplorer: {
     name: 'Polygonscan (Mumbai)',
-    generateContractUrl: (contractAddress: string) => `https://mumbai.polygonscan.com/address/${contractAddress}`,
+    generateContractUrl: (contractAddress: string) =>
+      `https://mumbai.polygonscan.com/address/${contractAddress}`,
   },
-}
+};
 
 export const polygonMainnet: NetworkConfigInterface = {
   chainId: 137,
   symbol: 'MATIC',
   blockExplorer: {
     name: 'Polygonscan',
-    generateContractUrl: (contractAddress: string) => `https://polygonscan.com/address/${contractAddress}`,
+    generateContractUrl: (contractAddress: string) =>
+      `https://polygonscan.com/address/${contractAddress}`,
   },
-}
+};
