@@ -18,18 +18,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Setup Node.js (Smart contract)
-        uses: actions/setup-node@v2
-        with:
-          node-version: '18.0.0'
-          cache: yarn
-          cache-dependency-path: smart-contract/yarn.lock
-
-      - name: Yarn install (Smart contract)
-        run: cd ./smart-contract && yarn install
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Setup Node.js (DAPP)
         uses: actions/setup-node@v2
         with:
