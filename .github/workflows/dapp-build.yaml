@@ -30,9 +30,6 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Compile smart contract
-        run: cd ./smart-contract && yarn compile
-
       - name: Setup Node.js (DAPP)
         uses: actions/setup-node@v2
         with:
