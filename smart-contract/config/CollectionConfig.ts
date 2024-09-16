@@ -1,7 +1,7 @@
 import CollectionConfigInterface from '../lib/CollectionConfigInterface';
 import * as Networks from '../lib/Networks';
 import * as Marketplaces from '../lib/Marketplaces';
-import whitelistAddresses from './whitelist.json';
+import whitelistAddresses from './whitelist';
 
 const CollectionConfig: CollectionConfigInterface = {
   testnet: Networks.ethereumTestnet,
