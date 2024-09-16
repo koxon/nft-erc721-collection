@@ -45,7 +45,7 @@ const Dapp: React.FC = () => {
         console.log(e);
       }
     },
-    [colectionContract, tokenPrice]
+    [colectionContract, tokenPrice, refetch]
   );
 
   const whitelistMintTokens = async (amount: number, charityId: number): Promise<void> => {
