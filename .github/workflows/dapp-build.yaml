@@ -21,6 +21,7 @@ jobs:
       - name: Setup Node.js (Smart contract)
         uses: actions/setup-node@v2
         with:
+          node-version: '18.0.0'
           cache: yarn
           cache-dependency-path: smart-contract/yarn.lock
 
@@ -35,6 +36,7 @@ jobs:
       - name: Setup Node.js (DAPP)
         uses: actions/setup-node@v2
         with:
+          node-version: '18.0.0'
           cache: yarn
           cache-dependency-path: minting-dapp/yarn.lock
 
