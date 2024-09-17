@@ -1,8 +1,7 @@
 #minting-dapp {
   @apply flex flex-col gap-6;
-  @apply mt-6 mx-auto;
-  @apply w-full;
-  @apply max-w-md;
+  @apply mx-auto;
+  width: 100vw;
 
   .intro-title {
     @apply text-2xl;
@@ -48,7 +47,7 @@
       }
 
       &:not(:first-child)::before {
-        content: '';
+        content: "";
 
         @apply block;
         @apply mx-auto my-3;
@@ -266,25 +265,6 @@
       &:not(:last-child) {
         @apply border-b border-popups-internal_border;
       }
-    }
-  }
-
-  .footer {
-    @apply flex flex-col items-center;
-    @apply rounded-lg;
-    @apply overflow-hidden;
-
-    @apply text-popups-txt text-center;
-    @apply bg-popups-bg;
-    @apply shadow;
-
-    @apply border-8;
-    @apply border-black;
-
-    @apply p-3 mb-2;
-
-    & > * {
-      @apply w-full;
     }
   }
 
