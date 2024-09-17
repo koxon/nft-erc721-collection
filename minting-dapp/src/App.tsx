@@ -1,11 +1,11 @@
 import { RainbowKitProvider, darkTheme } from "@rainbow-me/rainbowkit";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { BrowserRouter } from "react-router-dom";
+
 import { WagmiProvider } from "wagmi";
-import Dapp from "./components/Dapp";
+
 import { wagmiConfig } from "./config/wallet";
 import "@rainbow-me/rainbowkit/styles.css";
+import Router from "./routes";
 
 export const queryClient = new QueryClient();
 
@@ -25,11 +25,8 @@ export default function App() {
             overlayBlur: "small",
           })}
         >
-          <BrowserRouter>
-            <Dapp />
-          </BrowserRouter>
+          <Router />
         </RainbowKitProvider>
-        <ReactQueryDevtools />
       </QueryClientProvider>
     </WagmiProvider>
   );
