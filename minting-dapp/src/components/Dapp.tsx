@@ -15,7 +15,7 @@ import { useAccount } from "wagmi";
 import { useEthersSigner } from "../hooks/useEthersSigner";
 import { useContractDetails } from "../hooks/useContractInfo";
 import { useCharities } from "../hooks/useCharities";
-import Footer from "./Footer";
+// import Footer from "./Footer1";
 
 const Dapp: React.FC = () => {
   const { address, chainId, isConnected } = useAccount();
@@ -181,7 +181,7 @@ const Dapp: React.FC = () => {
               </div>
             )}
 
-            <Footer contractAddress={colectionContract.address} />
+            {/* <Footer contractAddress={colectionContract.address} /> */}
           </>
         </>
       ) : null}
