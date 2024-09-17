@@ -1,0 +1,52 @@
+.charities-section {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  margin-bottom: 150px;
+
+  .charities-title {
+    color: #000;
+    font-variant-numeric: lining-nums proportional-nums;
+    font-family: "Mulish", sans-serif;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-bottom: 20px;
+  }
+  .charities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    .charity {
+      width: 32.5%;
+      border-radius: 8px;
+      border: 1px solid rgba(44, 35, 27, 0.2);
+      background: #fff;
+      padding: 12px;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.1s ease;
+      &:hover {
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        border: 1px solid #2c231b;
+      }
+      img {
+        width: 100px;
+        height: 100px;
+      }
+      h3 {
+        color: #2c231b;
+        text-align: center;
+        font-variant-numeric: lining-nums proportional-nums;
+        font-family: "Mulish", sans-serif;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+      }
+    }
+  }
+}
