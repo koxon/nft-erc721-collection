@@ -168,7 +168,15 @@ export default function Home() {
         </div>
         <div className="contract">
           Contract address
-          <Link to={`https://etherscan.io/address/${colectionContract?.address}`} target="_blank" rel="noopener noreferrer">
+          <Link
+            to={
+              isTestnet
+                ? `https://sepolia.etherscan.io/address/${CollectionConfig.contractAddressTest}`
+                : `https://etherscan.io/address/${CollectionConfig.contractAddress}`
+            }
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src={etherscan} alt="" />
           </Link>
         </div>
