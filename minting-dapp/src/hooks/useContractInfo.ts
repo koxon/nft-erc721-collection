@@ -3,13 +3,14 @@ import { useMemo } from "react";
 import { colectionContract, colectionContractTest } from "../config/constants";
 import { BigNumber } from "ethers";
 
-const contractDetails = ["maxSupply", "totalSupply", "maxMintAmountPerTx", "cost", "paused", "whitelistMintEnabled"];
+const contractDetails = ["maxSupply", "totalSupply", "maxMintAmountPerTx", "cost", "paused", "whitelistMintEnabled", "payableToCharity"];
 
 type ContractDetailsOutput = {
   maxSupply: number;
   totalSupply: number;
   maxMintAmountPerTx: number;
   tokenPrice: BigNumber;
+  payableToCharity: BigNumber;
   isPaused: boolean;
   isWhitelistMintEnabled: boolean;
   isLoading: boolean;
@@ -31,11 +32,12 @@ export function useContractDetails({ isTestnet }: { isTestnet: boolean }): Contr
   });
 
   return useMemo(() => {
-    const [maxSupply, totalSupply, maxMintAmountPerTx, cost, paused, whitelistMintEnabled] = details;
+    const [maxSupply, totalSupply, maxMintAmountPerTx, cost, paused, whitelistMintEnabled, payableToCharity] = details;
 
     return {
       maxSupply: maxSupply.data?.toNumber(),
       totalSupply: totalSupply.data?.toNumber(),
+      payableToCharity: payableToCharity.data || BigNumber.from(0),
       maxMintAmountPerTx: maxMintAmountPerTx.data?.toNumber(),
       tokenPrice: cost.data || BigNumber.from(0),
       isPaused: paused.data,
