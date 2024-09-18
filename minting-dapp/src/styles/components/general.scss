@@ -135,6 +135,15 @@ span.emoji {
       color: #000000;
     }
   }
+
+  &.disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    &:hover {
+      background: #f42921;
+      color: #f2ede9;
+    }
+  }
 }
 
 input[type="text"] {
@@ -169,4 +178,107 @@ label {
 
   @apply font-semibold;
   @apply text-label text-sm;
+}
+
+/* start toastify container */
+.Toastify__toast-container {
+  width: auto !important;
+  z-index: 999999 !important;
+  font-size: 0.875rem;
+
+  --toastify-color-progress-error: #e83a63;
+  --toastify-icon-color-error: #e83a63;
+  --toastify-icon-color-warning: #fda41e;
+  --toastify-color-progress-warning: #fda41e;
+  --toastify-icon-color-success: #21ce99;
+  --toastify-color-progress-success: #21ce99;
+  --toastify-icon-color-info: #348ae5;
+  --toastify-color-progress-info: #348ae5;
+
+  @media (max-width: 550px) {
+    left: 0 !important;
+    right: 0 !important;
+    top: 0 !important;
+  }
+
+  &.fix-width-toast {
+    width: auto !important;
+    height: max-content !important;
+  }
+
+  .Toastify__toast {
+    min-height: auto;
+    border-radius: 8px;
+    // box-shadow: var(--joy-shadow-lg);
+    font-family: "Mulish", sans-serif;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 600;
+
+    @media (max-width: 550px) {
+      border-radius: 0;
+      border: none;
+      font-size: 0.75rem;
+    }
+
+    .Toastify__close-button {
+      opacity: 1;
+    }
+
+    &.bg-warning {
+      background: rgba(46, 27, 5, 0.8);
+      color: #fce1c2;
+      .Toastify__close-button {
+        color: #fce1c2;
+      }
+    }
+    &.bg-error {
+      background: rgba(67, 10, 10, 0.8);
+      color: #f7c5c5;
+      .Toastify__close-button {
+        color: #f7c5c5;
+      }
+    }
+    &.bg-success {
+      background: rgba(4, 47, 4, 0.8);
+      color: #c7f7c7;
+      .Toastify__close-button {
+        color: #c7f7c7;
+      }
+    }
+    &.bg-info {
+      background: rgba(10, 39, 68, 0.8);
+      color: #c7dff7;
+      .Toastify__close-button {
+        color: #c7dff7;
+      }
+    }
+  }
+
+  .Toastify__toast-body {
+    text-align: left !important;
+    padding: 10px;
+  }
+
+  .Toastify__progress-bar {
+    transform-origin: left !important;
+  }
+
+  &--bottom-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+}
+
+.custom-toast {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  svg,
+  img {
+    width: 1rem !important;
+    height: 1rem !important;
+  }
 }
