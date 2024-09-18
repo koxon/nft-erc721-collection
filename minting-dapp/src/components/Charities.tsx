@@ -10,15 +10,22 @@ import { useMemo } from "react";
 import { CollectionConfig } from "config/collectionConfig";
 import { Link } from "react-router-dom";
 import parse from "html-react-parser";
+import clsx from "clsx";
 
-export default function Charities() {
+type CharityProps = {
+  fromMint?: boolean;
+  selectCharity?: (id: number) => void;
+  charityId?: number;
+};
+
+export default function Charities({ fromMint, selectCharity, charityId }: CharityProps) {
   const { chainId } = useAccount();
   const isTestnet = useMemo((): boolean => chainId === CollectionConfig.testnet.chainId, [chainId]);
   const { charities } = useCharities({ isTestnet });
 
   return charities.length ? (
     <div className="charities-section">
-      <div className="charities-title">Charities</div>
+      <div className="charities-title">{fromMint ? "Please select a charity below" : "Charities"}</div>
       <div className="charities">
         {charities.map((charity, index) => {
           const charityImage = {
@@ -30,7 +37,19 @@ export default function Charities() {
             Animals: Animals,
           }[charity?.short_name];
 
-          return (
+          return fromMint ? (
+            <div
+              className={clsx("charity", { selected: charityId === index })}
+              key={charity?.name || index}
+              onClick={() => selectCharity && selectCharity(index)}
+            >
+              <img src={charityImage} alt={charity?.short_name} />
+              <h3>
+                {charity?.name}
+                {charityId === index && <div className="selected-indicator">Selected</div>}
+              </h3>
+            </div>
+          ) : (
             <Link
               className="charity"
               key={charity?.name || index}
