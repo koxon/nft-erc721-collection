@@ -1,5 +1,3 @@
-import clsx from "clsx";
-
 type LoaderProps = {
   width?: string;
 };
