@@ -122,6 +122,9 @@ export default function Mint() {
   }, [charityId, isPaused, mintAmount, mintTokens, whitelistMintTokens, signer, tokenPrice]);
 
   const isSaleOpen = useMemo((): boolean => isWhitelistMintEnabled || !isPaused, [isPaused, isWhitelistMintEnabled]);
+  const isUserInWhitelist = useMemo((): boolean => Whitelist.contains(address!), [address]);
+  const canWhitelistMint = useMemo((): boolean => isWhitelistMintEnabled && isUserInWhitelist, [isWhitelistMintEnabled, isUserInWhitelist]);
+  const canMint = useMemo((): boolean => !isPaused || canWhitelistMint, [isPaused, canWhitelistMint]);
 
   return (
     <div className="mint-page">
@@ -159,16 +162,16 @@ export default function Mint() {
           <h3>Price</h3>
           <p>{isLoading ? <Loader width="20" /> : utils.formatEther(tokenPrice?.mul(mintAmount))} ETH</p>
           <div className="controls-input">
-            <button className="decrease" onClick={decrementMintAmount} disabled={mintLoading}>
+            <button className="decrease" onClick={decrementMintAmount} disabled={!canMint || mintLoading}>
               <Minus />
             </button>
             <span className="mint-amount">{mintAmount}</span>
-            <button className="decrease" onClick={incrementMintAmount} disabled={mintLoading}>
+            <button className="decrease" onClick={incrementMintAmount} disabled={!canMint || mintLoading}>
               <Plus />
             </button>
           </div>
           <MainButton
-            disabled={mintLoading}
+            disabled={!canMint || mintLoading}
             title={isConnected ? "Mint NFT" : "Connect wallet"}
             onClick={!isConnected ? openConnectModal : () => void mint()}
           />
