@@ -121,6 +121,8 @@ export default function Mint() {
     }
   }, [charityId, isPaused, mintAmount, mintTokens, whitelistMintTokens, signer, tokenPrice]);
 
+  const isSaleOpen = useMemo((): boolean => isWhitelistMintEnabled || !isPaused, [isPaused, isWhitelistMintEnabled]);
+
   return (
     <div className="mint-page">
       <Header />
@@ -143,7 +145,9 @@ export default function Mint() {
         </div>
         <div className="info-item">
           <div className="title-info">Sale status</div>
-          <div className="value-info">{isLoading ? <Loader width="18" /> : "Open"}</div>
+          <div className="value-info">
+            {isLoading ? <Loader width="18" /> : <>{isSaleOpen ? <>{isWhitelistMintEnabled ? "Whitelist only" : "Open"}</> : "Closed"}</>}
+          </div>
         </div>
       </div>
       <div className="info-box mint-box">
