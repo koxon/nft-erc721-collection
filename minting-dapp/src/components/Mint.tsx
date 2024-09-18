@@ -16,7 +16,7 @@ import contractAbi from "../abi/fryHeadsNft.json";
 import Whitelist from "../lib/Whitelist";
 import Loader from "./Loader";
 import Footer from "./Footer";
-import { infoAlert, errorAlert, successAlert, dismissAlert } from "utils/toastGroup";
+import { infoAlert, errorAlert, successAlert, dismissAlert, warningAlert } from "utils/toastGroup";
 
 export default function Mint() {
   const { openConnectModal } = useConnectModal();
@@ -103,7 +103,7 @@ export default function Mint() {
 
   const mint = useCallback(async (): Promise<void> => {
     if (charityId === undefined) {
-      infoAlert("Please select a charity to mint a token.");
+      warningAlert("Please select a charity to mint a token.");
       return;
     }
 
