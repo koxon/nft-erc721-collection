@@ -1,0 +1,201 @@
+.home-section {
+  overflow: hidden;
+
+  .main-section {
+    position: relative;
+
+    .main-bg-img {
+      position: absolute;
+      width: 100%;
+      object-fit: cover;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 400px;
+      z-index: -1;
+    }
+
+    .main-img {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 1;
+      height: 700px;
+    }
+  }
+  .main-text {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding-top: 250px;
+    // font-family: "Inter", sans-serif;
+    .main-title {
+      font-size: 80px;
+      font-weight: 300;
+      line-height: 108px;
+      text-align: left;
+    }
+    .sub-title {
+      font-size: 80px;
+      font-weight: 700;
+      line-height: 108px;
+      text-align: left;
+      color: #f42921;
+    }
+    .title-text {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 32px;
+      text-align: left;
+      color: #615c57;
+      margin-bottom: 30px;
+      span {
+        display: flex;
+        align-items: flex-end;
+        gap: 8px;
+      }
+
+      a {
+        height: 36px;
+        img {
+          width: auto;
+          height: 100%;
+        }
+      }
+    }
+  }
+  .collection-section {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding-top: 100px;
+    margin-bottom: 100px;
+    .collection-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      .collection-title {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        h2 {
+          font-family: "Mulish", sans-serif;
+          font-size: 24px;
+          font-weight: 700;
+          line-height: 30.12px;
+          text-align: left;
+        }
+        div {
+          font-family: "Mulish", sans-serif;
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 17.57px;
+          text-align: left;
+          opacity: 0.7;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+      }
+      a {
+        padding: 10px 20px;
+        @apply rounded-full;
+        display: flex;
+        align-items: center;
+        border: 1px solid #00000026;
+        font-family: "Mulish", sans-serif;
+        font-size: 17px;
+        font-weight: 400;
+        line-height: 21.34px;
+        text-align: left;
+        gap: 8px;
+
+        &:hover {
+          box-shadow: 0px 0px 10px -4px #181818;
+        }
+      }
+    }
+    .nft-cards {
+      display: flex;
+      flex-wrap: wrap;
+      flex-basis: auto;
+      gap: 12px;
+    }
+  }
+  .charity-text-section {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    .charity-text {
+      color: #1a1a1a;
+      font-variant-numeric: lining-nums proportional-nums;
+      font-family: "Mulish", sans-serif;
+      font-size: 36px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+    }
+  }
+
+  .contact-section {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    margin-bottom: 100px;
+    .mail {
+      cursor: pointer;
+    }
+
+    .contract {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      img {
+        width: 22px;
+        height: 22px;
+      }
+    }
+    div {
+      width: 33.33333%;
+      color: #000;
+      font-variant-numeric: lining-nums proportional-nums;
+      font-family: "Mulish", sans-serif;
+      font-size: 15px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 33px;
+      text-transform: uppercase;
+      border-right: 1px solid rgba(0, 0, 0, 0.1);
+      padding: 5px 16px;
+
+      &:last-child {
+        border-right: none;
+      }
+    }
+
+    .find-us {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      span {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+    }
+  }
+
+  .bottom-img {
+    min-width: 4000px;
+    margin-left: -70px;
+    margin-bottom: 50px;
+  }
+}
