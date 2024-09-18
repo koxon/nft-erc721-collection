@@ -1,8 +1,7 @@
 import { RainbowKitProvider, darkTheme } from "@rainbow-me/rainbowkit";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
+import { ToastContainer } from "react-toastify";
 import { WagmiProvider } from "wagmi";
-
 import { wagmiConfig } from "./config/wallet";
 import "@rainbow-me/rainbowkit/styles.css";
 import Router from "./routes";
@@ -25,6 +24,7 @@ export default function App() {
             overlayBlur: "small",
           })}
         >
+          <ToastContainer className="fix-width-toast" newestOnTop={true} />
           <Router />
         </RainbowKitProvider>
       </QueryClientProvider>
