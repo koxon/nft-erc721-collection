@@ -1,7 +1,7 @@
 import mintImg from "../assets/img/mint-img.png";
 import { ReactComponent as Plus } from "../assets/svg/plus.svg";
 import { ReactComponent as Minus } from "../assets/svg/minus.svg";
-import { useAccount } from "wagmi";
+import { useAccount, useSwitchChain } from "wagmi";
 import Header from "./Header";
 import { useCallback, useMemo, useState } from "react";
 import { CollectionConfig } from "config/collectionConfig";
@@ -24,6 +24,7 @@ export default function Mint() {
   const [mintAmount, setMintAmount] = useState<number>(1);
   const [mintLoading, setMintLoading] = useState(false);
   const { address, chainId, isConnected } = useAccount();
+  const { switchChainAsync } = useSwitchChain();
   const signer = useEthersSigner();
 
   const isTestnet = useMemo((): boolean => chainId === CollectionConfig.testnet.chainId, [chainId]);
@@ -106,6 +107,10 @@ export default function Mint() {
       warningAlert("Please select a charity to mint a token.");
       return;
     }
+    if (chainId !== CollectionConfig.testnet.chainId && chainId !== CollectionConfig.mainnet.chainId) {
+      await switchChainAsync({ chainId: CollectionConfig.mainnet.chainId });
+      return;
+    }
 
     const balance = await signer?.getBalance();
 
@@ -119,7 +124,7 @@ export default function Mint() {
     } else {
       await whitelistMintTokens(mintAmount, charityId);
     }
-  }, [charityId, isPaused, mintAmount, mintTokens, whitelistMintTokens, signer, tokenPrice]);
+  }, [charityId, isPaused, mintAmount, mintTokens, whitelistMintTokens, signer, tokenPrice, chainId, switchChainAsync]);
 
   const isSaleOpen = useMemo((): boolean => isWhitelistMintEnabled || !isPaused, [isPaused, isWhitelistMintEnabled]);
   const isUserInWhitelist = useMemo((): boolean => Whitelist.contains(address!), [address]);
