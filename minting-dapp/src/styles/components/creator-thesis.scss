@@ -1,0 +1,84 @@
+.creator-thesis-section {
+  padding-top: 120px;
+  @media (max-width: 860px) {
+    padding: 0px;
+    padding-bottom: 70px;
+  }
+
+  .creator-header {
+    display: flex;
+    gap: 18px;
+    img {
+      width: 50px;
+      height: 50px;
+      @media (max-width: 500px) {
+        width: 40px;
+        height: 40px;
+      }
+    }
+    .creator-title {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      color: #2c231b;
+      font-variant-numeric: lining-nums proportional-nums;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      @media (max-width: 500px) {
+        font-size: 18px;
+      }
+      p {
+        font-size: 16px;
+        font-weight: 400;
+        opacity: 0.6;
+        @media (max-width: 500px) {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+  .arrow {
+    width: 100%;
+    height: 1px;
+    opacity: 0.1;
+    background: #2c231b;
+    margin: 16px 0;
+    @media (max-width: 500px) {
+      margin: 12px 0;
+    }
+  }
+  .creator-text {
+    color: #2c231b;
+    font-variant-numeric: lining-nums proportional-nums;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 34px;
+    opacity: 0.6;
+    width: 900px;
+    align-self: stretch;
+
+    @media (max-width: 950px) {
+      width: 810px;
+      font-size: 18px;
+      line-height: 32px;
+    }
+    @media (max-width: 840px) {
+      width: 680px;
+      font-size: 18px;
+      line-height: 32px;
+    }
+    @media (max-width: 700px) {
+      width: 100%;
+      font-size: 18px;
+      line-height: 32px;
+    }
+    @media (max-width: 500px) {
+      font-size: 16px;
+      line-height: 32px;
+    }
+  }
+}
