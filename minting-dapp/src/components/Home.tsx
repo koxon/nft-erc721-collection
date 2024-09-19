@@ -24,6 +24,8 @@ import Loader from "./Loader";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { useNavigate } from "react-router-dom";
 import { routePaths } from "routes/routePaths";
+import { useWindowWidth } from "@react-hook/window-size";
+import CreatorThesis from "./CreatorThesis";
 
 const nfts = [
   {
@@ -81,26 +83,31 @@ const nfts = [
 export default function Home() {
   const { openConnectModal } = useConnectModal();
   const navigate = useNavigate();
+  const windowWidth = useWindowWidth({ wait: 0 });
 
-  const { address, chainId, isConnected } = useAccount();
-  const signer = useEthersSigner();
+  const { chainId, isConnected } = useAccount();
+
   const isTestnet = useMemo((): boolean => chainId === CollectionConfig.testnet.chainId, [chainId]);
 
-  const { totalSupply, maxSupply, maxMintAmountPerTx, isPaused, tokenPrice, isWhitelistMintEnabled, refetch, isLoading } = useContractDetails({
+  const { totalSupply, maxSupply, tokenPrice, isLoading } = useContractDetails({
     isTestnet,
   });
-  const { charities } = useCharities({ isTestnet });
-
-  const colectionContract = useMemo(
-    () => new ethers.Contract(isTestnet ? CollectionConfig.contractAddressTest : CollectionConfig.contractAddress, contractAbi, signer),
-    [signer, isTestnet]
-  );
 
   const sendEmail = useCallback(() => {
     window.open("mailto:support@fryheads.com", "_blank");
   }, []);
 
   const remainingNfts = useMemo(() => maxSupply - totalSupply, [maxSupply, totalSupply]);
+
+  const nftList = useMemo(() => {
+    if (windowWidth <= 1050) {
+      return nfts.slice(0, -4);
+    } else if (windowWidth <= 1340) {
+      return nfts.slice(0, -2);
+    } else {
+      return nfts;
+    }
+  }, [windowWidth]);
 
   return (
     <div className="home-section">
@@ -114,9 +121,16 @@ export default function Home() {
           <h1 className="main-title">Mint a NFT</h1>
           <p className="sub-title">Give to charity</p>
           <p className="title-text">
-            50% of the mint price and secondary sales fees <br />
+            {windowWidth <= 400 ? (
+              <>
+                50% of the mint price and
+                <br /> secondary sales fees are sent to
+              </>
+            ) : (
+              "50% of the mint price and secondary sales fees"
+            )}
             <span>
-              are sent to
+              {windowWidth >= 400 && "are sent to"}
               <Link to="https://thegivingblock.com/" target="_blank" rel="noreferrer">
                 <img src={givingblock} alt="" className="givingblock" />{" "}
               </Link>
@@ -128,19 +142,22 @@ export default function Home() {
             onClick={!isConnected ? openConnectModal : () => navigate(generatePath(routePaths.mint))}
           />
         </div>
+        {windowWidth > 860 && <CreatorThesis />}
         <div className="collection-section">
           <div className="collection-header">
             <div className="collection-title">
               <h2>Notre Collection</h2>
-              <div>{isLoading ? <Loader width="16" /> : remainingNfts} Fry Heads to mint remaining</div>
+              <div>
+                {isLoading ? <Loader width="16" /> : remainingNfts} {windowWidth > 550 && "Fry Heads to mint"} remaining
+              </div>
             </div>
             <Link to="https://opensea.io/collection/fryheadsnft" target="_blank" rel="noreferrer">
-              See entire collection <Opensee />
+              {windowWidth <= 550 ? "All collection" : "See entire collection"} <Opensee />
             </Link>
           </div>
 
           <div className="nft-cards">
-            {nfts.map((nft) => (
+            {nftList.map((nft) => (
               <Card
                 key={nft.name}
                 nft={nft}
@@ -151,6 +168,8 @@ export default function Home() {
             ))}
           </div>
         </div>
+
+        {windowWidth <= 860 && <CreatorThesis />}
         <Charities />
         <div className="charity-text-section">
           <div className="charity-text">

@@ -21,6 +21,24 @@
       right: 0;
       z-index: 1;
       height: 700px;
+      @media (max-width: 1340px) {
+        height: 600px;
+      }
+      @media (max-width: 800px) {
+        height: 500px;
+      }
+      @media (max-width: 700px) {
+        right: -50px;
+      }
+      @media (max-width: 600px) {
+        height: 400px;
+      }
+      @media (max-width: 500px) {
+        height: 350px;
+      }
+      @media (max-width: 450px) {
+        height: 300px;
+      }
     }
   }
 
@@ -29,9 +47,18 @@
     margin: 0 auto;
     padding: 0 20px;
     padding-top: 250px;
+
+    @media (max-width: 1340px) {
+      padding-top: 200px;
+    }
+    @media (max-width: 600px) {
+      padding-top: 150px;
+    }
   }
   .main-text {
     width: 100%;
+    position: relative;
+    z-index: 2;
 
     // font-family: "Inter", sans-serif;
     .main-title {
@@ -39,6 +66,19 @@
       font-weight: 300;
       line-height: 108px;
       text-align: left;
+
+      @media (max-width: 1340px) {
+        font-size: 60px;
+        line-height: 80px;
+      }
+      @media (max-width: 500px) {
+        font-size: 50px;
+        line-height: 60px;
+      }
+      @media (max-width: 400px) {
+        font-size: 40px;
+        line-height: 50px;
+      }
     }
     .sub-title {
       font-size: 80px;
@@ -46,6 +86,18 @@
       line-height: 108px;
       text-align: left;
       color: #f42921;
+      @media (max-width: 1340px) {
+        font-size: 60px;
+        line-height: 80px;
+      }
+      @media (max-width: 500px) {
+        font-size: 50px;
+        line-height: 60px;
+      }
+      @media (max-width: 400px) {
+        font-size: 40px;
+        line-height: 50px;
+      }
     }
     .title-text {
       font-size: 20px;
@@ -54,6 +106,7 @@
       text-align: left;
       color: #615c57;
       margin-bottom: 30px;
+
       span {
         display: flex;
         align-items: flex-end;
@@ -62,10 +115,26 @@
 
       a {
         height: 36px;
+        @media (max-width: 1340px) {
+          height: 32px;
+        }
+        @media (max-width: 500px) {
+          height: 30px;
+          margin-bottom: -2px;
+        }
         img {
           width: auto;
           height: 100%;
         }
+      }
+      @media (max-width: 1340px) {
+        font-size: 18px;
+        line-height: 28px;
+      }
+      @media (max-width: 500px) {
+        font-size: 16px;
+        line-height: 24px;
+        margin-bottom: 20px;
       }
     }
   }
@@ -73,11 +142,20 @@
     width: 100%;
     padding-top: 100px;
     margin-bottom: 100px;
+
+    @media (max-width: 550px) {
+      padding-top: 70px;
+      margin-bottom: 70px;
+    }
     .collection-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 30px;
+      @media (max-width: 550px) {
+        align-items: flex-start;
+        margin-bottom: 20px;
+      }
       .collection-title {
         display: flex;
         flex-direction: column;
@@ -88,6 +166,12 @@
           font-weight: 700;
           line-height: 30.12px;
           text-align: left;
+          @media (max-width: 550px) {
+            font-size: 22px;
+          }
+          @media (max-width: 360px) {
+            font-size: 18px;
+          }
         }
         div {
           font-family: "Mulish", sans-serif;
@@ -117,6 +201,12 @@
         &:hover {
           box-shadow: 0px 0px 10px -4px #181818;
         }
+        @media (max-width: 550px) {
+          padding: 5px 8px;
+        }
+        @media (max-width: 365px) {
+          font-size: 16px;
+        }
       }
     }
     .nft-cards {
@@ -124,6 +214,10 @@
       flex-wrap: wrap;
       flex-basis: auto;
       gap: 12px;
+
+      @media (max-width: 550px) {
+        justify-content: center;
+      }
     }
   }
   .charity-text-section {
@@ -140,6 +234,30 @@
       font-style: normal;
       font-weight: 600;
       line-height: normal;
+      @media (max-width: 1000px) {
+        font-size: 32px;
+      }
+      @media (max-width: 767px) {
+        font-size: 28px;
+      }
+      @media (max-width: 660px) {
+        font-size: 22px;
+      }
+      @media (max-width: 440px) {
+        font-size: 20px;
+      }
+      @media (max-width: 400px) {
+        font-size: 18px;
+      }
+    }
+    .secoundary-button {
+      @media (max-width: 660px) {
+        padding: 8px 16px;
+        font-size: 14px;
+      }
+      @media (max-width: 530px) {
+        display: none;
+      }
     }
   }
 
@@ -148,6 +266,12 @@
     width: 100%;
     display: flex;
     margin-bottom: 100px;
+
+    @media (max-width: 550px) {
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 50px;
+    }
     .mail {
       cursor: pointer;
     }
@@ -178,6 +302,24 @@
       &:last-child {
         border-right: none;
       }
+
+      @media (max-width: 767px) {
+        font-size: 14px;
+        padding: 5px 10px;
+      }
+      @media (max-width: 650px) {
+        font-size: 12px;
+      }
+      @media (max-width: 550px) {
+        padding: 5px 16px;
+        font-size: 14px;
+        border-right: none;
+        width: 100%;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        &:last-child {
+          border-bottom: none;
+        }
+      }
     }
 
     .find-us {
@@ -196,5 +338,8 @@
     min-width: 4000px;
     margin-left: -70px;
     margin-bottom: 50px;
+    @media (max-width: 650px) {
+      margin-bottom: 30px;
+    }
   }
 }
