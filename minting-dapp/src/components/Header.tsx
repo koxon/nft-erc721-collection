@@ -7,21 +7,21 @@ import { generatePath, Link } from "react-router-dom";
 import { routePaths } from "routes/routePaths";
 import { useLocation } from "react-router-dom";
 import clsx from "clsx";
-import { useMediaQuery } from "usehooks-ts";
+import { useWindowWidth } from "@react-hook/window-size";
 
 export default function Header() {
   const { openConnectModal } = useConnectModal();
   const { address, isConnected } = useAccount();
   const { pathname } = useLocation();
-  const isMobile = useMediaQuery("(max-width: 600px)");
+  const windowWidth = useWindowWidth({ wait: 0 });
 
   return (
     <div className="header-section">
-      <div className="header-logo">
+      <Link to={generatePath(routePaths.home)} className="header-logo">
         <img src={logo} alt="logo" />
         Fry<span>Heads</span>
-      </div>
-      {!isMobile && (
+      </Link>
+      {windowWidth > 600 && (
         <div className="header-links">
           <Link to={generatePath(routePaths.home)} className={clsx({ active: pathname === generatePath(routePaths.home) })}>
             Home
@@ -45,4 +45,7 @@ export default function Header() {
       )}
     </div>
   );
+}
+function useMediaQuery(arg0: string) {
+  throw new Error("Function not implemented.");
 }
