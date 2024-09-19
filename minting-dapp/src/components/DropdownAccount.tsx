@@ -2,15 +2,18 @@ import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { ChevronDownIcon, HomeIcon, ArrowLeftStartOnRectangleIcon, ShoppingBagIcon, Square3Stack3DIcon } from "@heroicons/react/20/solid";
 import { shortPubKey } from "utils";
 import { useDisconnect } from "wagmi";
-import { useMediaQuery } from "usehooks-ts";
+import { useWindowWidth } from "@react-hook/window-size";
 import { generatePath, Link, useLocation } from "react-router-dom";
 import { routePaths } from "routes/routePaths";
 import clsx from "clsx";
+import { useMemo } from "react";
 
 export default function DropdownAccount({ address }: { address: `0x${string}` }) {
   const { disconnect } = useDisconnect();
   const { pathname } = useLocation();
-  const isMobile = useMediaQuery("(max-width: 600px)");
+  const windowWidth = useWindowWidth({ wait: 0 });
+  const isMobile = useMemo(() => windowWidth <= 600, [windowWidth]);
+
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
