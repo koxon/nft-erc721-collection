@@ -12,9 +12,18 @@
 
   border-radius: 100px;
   border: 0.999px solid rgba(0, 0, 0, 0.15);
-  background: rgba(255, 255, 255, 0.04);
+  background: #ffffff0a;
   backdrop-filter: blur(21.96963882446289px);
   padding: 10px 20px;
+
+  @media (max-width: 1340px) {
+    width: calc(100% - 40px);
+  }
+
+  @media (max-width: 767px) {
+    padding: 5px 10px;
+    width: calc(100% - 20px);
+  }
 
   .header-logo {
     color: #000;
@@ -33,6 +42,12 @@
       width: auto;
       height: 40px;
     }
+    @media (max-width: 767px) {
+      font-size: 18px;
+      img {
+        height: 30px;
+      }
+    }
   }
 
   .header-links {
@@ -48,6 +63,11 @@
 
     .active {
       font-weight: 700;
+    }
+
+    @media (max-width: 767px) {
+      font-size: 16px;
+      gap: 30px;
     }
   }
 }
