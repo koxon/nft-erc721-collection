@@ -4,8 +4,13 @@ export default function About() {
   return (
     <div className="about-page">
       <Header />
-      <h1>About</h1>
-      <p>This is a simple minting dapp that allows users to mint NFTs.</p>
+      <div className="content-box">
+        <div className="main-text">
+          <h1 className="main-title">About</h1>
+          <p className="sub-title">Give to charity</p>
+          <p className="title-text"></p>
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,7 +1,7 @@
-import React, { useCallback, useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import mainImg from "../assets/img/main-img.png";
-import bottomImg from "../assets/img/bottom-img.png";
-import mainBg from "../assets/img/list-ch.png";
+import bottomImg from "../assets/img/bottom-img.jpg";
+// import mainBg from "../assets/img/list-ch.png";
 import etherscan from "../assets/img/etherscan.png";
 import { ReactComponent as Opensee } from "../assets/svg/opensee.svg";
 import { ReactComponent as OpenseeBl } from "../assets/svg/os.svg";
@@ -22,58 +22,43 @@ import { useNavigate } from "react-router-dom";
 import { routePaths } from "routes/routePaths";
 import { useWindowWidth } from "@react-hook/window-size";
 import CreatorThesis from "./CreatorThesis";
+import fh1 from "../assets/img/preview/1.png";
+import fh2 from "../assets/img/preview/2.png";
+import fh3 from "../assets/img/preview/3.png";
+import fh4 from "../assets/img/preview/4.png";
+import fh5 from "../assets/img/preview/5.png";
 
 const nfts = [
   {
     name: "Fry Head #1",
     description: "The Fry Heads",
     backround: "#876D4E",
+    src: fh1
   },
   {
     name: "Fry Head #2",
     description: "The Fry Heads",
     backround: "#44856B",
+    src: fh2
   },
   {
     name: "Fry Head #3",
     description: "The Fry Heads",
     backround: "#717D61",
+    src: fh3
   },
   {
     name: "Fry Head #4",
     description: "The Fry Heads",
     backround: "#876D4E",
+    src: fh4
   },
   {
     name: "Fry Head #5",
     description: "The Fry Heads",
     backround: "#44856B",
-  },
-  {
-    name: "Fry Head #6",
-    description: "The Fry Heads",
-    backround: "#876D4E",
-  },
-  {
-    name: "Fry Head #7",
-    description: "The Fry Heads",
-    backround: "#44856B",
-  },
-  {
-    name: "Fry Head #8",
-    description: "The Fry Heads",
-    backround: "#717D61",
-  },
-  {
-    name: "Fry Head #9",
-    description: "The Fry Heads",
-    backround: "#876D4E",
-  },
-  {
-    name: "Fry Head #10",
-    description: "The Fry Heads",
-    backround: "#44856B",
-  },
+    src: fh5
+  }
 ];
 
 export default function Home() {
@@ -90,7 +75,7 @@ export default function Home() {
   });
 
   const sendEmail = useCallback(() => {
-    window.open("mailto:support@fryheads.com", "_blank");
+    window.open("mailto:fryheads@gmail.com", "_blank");
   }, []);
 
   const remainingNfts = useMemo(() => maxSupply - totalSupply, [maxSupply, totalSupply]);
@@ -110,7 +95,7 @@ export default function Home() {
       <Header />
       <div className="main-section">
         <img src={mainImg} alt="" className="main-img" />
-        <img src={mainBg} alt="" className="main-bg-img" />
+        {/* <img src={mainBg} alt="" className="main-bg-img" /> */}
       </div>
       <div className="content-box">
         <div className="main-text">
@@ -126,15 +111,22 @@ export default function Home() {
               "50% of the mint price and secondary sales fees"
             )}
             <span>
-              {windowWidth >= 400 && "are sent to"}
+              {windowWidth >= 400 && "are sent to the "}
+              charity of your choice, in perpetuity.
+            </span>
+            <br></br>
+            <span>
               <Link to="https://thegivingblock.com/" target="_blank" rel="noreferrer">
                 <img src={givingblock} alt="" className="givingblock" />{" "}
               </Link>
-              in perpetuity.
             </span>
           </p>
           <MainButton
             title={isConnected ? "Mint NFT" : "Connect wallet"}
+            onClick={!isConnected ? openConnectModal : () => navigate(generatePath(routePaths.mint))}
+          />
+          <MainButton
+            title={"Buy from Marketplace"}
             onClick={!isConnected ? openConnectModal : () => navigate(generatePath(routePaths.mint))}
           />
         </div>
@@ -142,7 +134,7 @@ export default function Home() {
         <div className="collection-section">
           <div className="collection-header">
             <div className="collection-title">
-              <h2>Notre Collection</h2>
+              <h2>Collection preview</h2>
               <div>
                 {isLoading ? <Loader width="16" /> : remainingNfts} {windowWidth > 550 && "Fry Heads to mint"} remaining
               </div>
@@ -198,7 +190,7 @@ export default function Home() {
           <div className="find-us">
             Find us on
             <span>
-              <Link to="https://twitter.com/FryHeadsNFT" target="_blank" rel="noreferrer">
+              <Link to="https://twitter.com/nft_freezer" target="_blank" rel="noreferrer">
                 <X />
               </Link>
               <Link to="https://opensea.io/collection/fryheadsnft" target="_blank" rel="noreferrer">
