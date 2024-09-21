@@ -208,28 +208,28 @@ export default function Mint() {
               to={
                 isTestnet
                   ? `https://sepolia.etherscan.io/address/${CollectionConfig.contractAddressTest}`
-                  : `https://etherscan.io/address/${CollectionConfig.contractAddress}`
+                  : `https://etherscan.io/address/${CollectionConfig.contractAddress}#writeContract`
               }
               target="_blank"
               rel="noopener noreferrer"
             >
-              etherscan.io.
-            </Link>
+              etherscan.io
+            </Link> and to the &apos;Contract&apos; tab and &apos;Write Contract&apos; sub tab.
           </div>
-          <div>2. Execute the &quot;withdraw&quot; method of the smart contract.</div>
-          <div>3. If there are any WETH tokens in the contract, first execute the &quot;withdrawETH&quot; method to convert them into ETH.</div>
+          <div>2. Execute the <b>withdraw()</b> method of the smart contract.</div>
+          <div>3. If there are any WETH tokens in the contract, first execute the <b>withdrawETH()</b> method to convert them into ETH.</div>
         </div>
         <div className="desctiption">
-          <div className="sub-title">To determine which charity your NFT supports, follow these steps:</div>
-          <div>1. Use the tokenCharity(token_id) contract function to retrieve the charity ID associated with your NFT.</div>
-          <div>2. Next, use the charities(charity_id) contract function to access detailed information about the charity.</div>
+          <div className="sub-title">To determine which charity is associted to your NFT, follow these steps:</div>
+          <div>1. Use the <b>tokenCharity(token_id)</b> contract function to retrieve the charity ID associated with your NFT.</div>
+          <div>2. Next, use the <b>charities(charity_id)</b> contract function to access detailed information about the charity.</div>
           <div className="last-step">
             You can execute these functions directly on{" "}
             <Link
               to={
                 isTestnet
                   ? `https://sepolia.etherscan.io/address/${CollectionConfig.contractAddressTest}`
-                  : `https://etherscan.io/address/${CollectionConfig.contractAddress}`
+                  : `https://etherscan.io/address/${CollectionConfig.contractAddress}#readContract`
               }
               target="_blank"
               rel="noopener noreferrer"

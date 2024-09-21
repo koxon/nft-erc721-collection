@@ -1,4 +1,4 @@
-.home-section {
+.home-section, .about-page {
   overflow: hidden;
 
   .main-section {
@@ -261,6 +261,12 @@
     }
   }
 
+  .bottom-img-section {
+    max-width: 1340px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
   .contact-section {
     border: 1px solid rgba(0, 0, 0, 0.1);
     width: 100%;
@@ -335,8 +341,6 @@
   }
 
   .bottom-img {
-    // width: 50%;
-    // margin-left: -70px;
     margin-bottom: 50px;
     @media (max-width: 650px) {
       margin-bottom: 30px;

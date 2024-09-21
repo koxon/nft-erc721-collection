@@ -18,9 +18,9 @@ export default function CreatorThesis() {
       <div className="arrow" />
       <div className="creator-text">
         “Digital assets can turn creativity into a powerful force for good. Every FryHeads NFT sold or traded is a step towards making a real difference in the world. 
-        Our mission is to harness the potential of blockchain technology to support charitable causes and bring about positive change. 
+        Our mission is to harness the potential of NFTs to support charitable causes and bring about positive change. 
         With each purchase, collectors become part of a larger movement, where art and philanthropy intersect to create a brighter future for those in need. 
-        Together, we can prove that the digital revolution isn&#39;t just about greed and speculation, but also it&#39;s about compassion and community.”
+        Together, we can prove that the digital revolution isn&#39;t just about greed and speculation, but also about compassion and community.”
       </div>
     </div>
   );

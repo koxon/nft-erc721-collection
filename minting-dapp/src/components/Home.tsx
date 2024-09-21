@@ -116,6 +116,7 @@ export default function Home() {
             </span>
             <br></br>
             <span>
+              In partnership with
               <Link to="https://thegivingblock.com/" target="_blank" rel="noreferrer">
                 <img src={givingblock} alt="" className="givingblock" />{" "}
               </Link>
@@ -199,9 +200,9 @@ export default function Home() {
             </span>
           </div>
         </div>
-      </div>
 
-      <img src={bottomImg} alt="" className="bottom-img" />
+        <img src={bottomImg} alt="" className="bottom-img" />
+      </div>
       <Footer />
     </div>
   );
