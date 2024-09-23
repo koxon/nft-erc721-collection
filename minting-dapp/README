@@ -1,0 +1,22 @@
+# local dev
+
+Use yarn and not npm
+
+`yarn install`
+`yarn start`
+
+# Build
+
+Build to deploy to S3 bucket:
+
+`yarn build`
+
+# Put online
+
+Send the build files to S3 and invalidate the CDN distribution
+
+`aws s3 sync . s3://fryheads-webhost/`
+
+Invalidate Distrib
+
+`aws cloudfront create-invalidation --distribution-id ${{ CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"`
