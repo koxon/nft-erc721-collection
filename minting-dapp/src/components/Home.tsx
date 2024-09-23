@@ -33,32 +33,32 @@ const nfts = [
     name: "Fry Head #1",
     description: "The Fry Heads",
     backround: "#876D4E",
-    src: fh1
+    src: fh1,
   },
   {
     name: "Fry Head #2",
     description: "The Fry Heads",
     backround: "#44856B",
-    src: fh2
+    src: fh2,
   },
   {
     name: "Fry Head #3",
     description: "The Fry Heads",
     backround: "#717D61",
-    src: fh3
+    src: fh3,
   },
   {
     name: "Fry Head #4",
     description: "The Fry Heads",
     backround: "#876D4E",
-    src: fh4
+    src: fh4,
   },
   {
     name: "Fry Head #5",
     description: "The Fry Heads",
     backround: "#44856B",
-    src: fh5
-  }
+    src: fh5,
+  },
 ];
 
 export default function Home() {
@@ -81,10 +81,12 @@ export default function Home() {
   const remainingNfts = useMemo(() => maxSupply - totalSupply, [maxSupply, totalSupply]);
 
   const nftList = useMemo(() => {
-    if (windowWidth <= 1050) {
-      return nfts.slice(0, -4);
-    } else if (windowWidth <= 1340) {
+    if (windowWidth <= 767) {
+      return nfts.slice(0, -1);
+    } else if (windowWidth <= 1050) {
       return nfts.slice(0, -2);
+    } else if (windowWidth <= 1340) {
+      return nfts.slice(0, -1);
     } else {
       return nfts;
     }
@@ -126,10 +128,7 @@ export default function Home() {
             title={isConnected ? "Mint NFT" : "Connect wallet"}
             onClick={!isConnected ? openConnectModal : () => navigate(generatePath(routePaths.mint))}
           />
-          <MainButton
-            title={"Buy from Marketplace"}
-            onClick={!isConnected ? openConnectModal : () => navigate(generatePath(routePaths.mint))}
-          />
+          <MainButton title={"Buy from Marketplace"} onClick={!isConnected ? openConnectModal : () => navigate(generatePath(routePaths.mint))} />
         </div>
         {windowWidth > 860 && <CreatorThesis />}
         <div className="collection-section">

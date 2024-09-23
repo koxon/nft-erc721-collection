@@ -33,12 +33,13 @@
     align-items: flex-end;
     margin-bottom: 10px;
     position: relative;
-    @media (max-width: 550px) {
-      height: 268px;
-    }
+    // @media (max-width: 550px) {
+    //   height: 268px;
+    // }
 
     img {
-      height: 90%;
+      height: 100%;
+      width: 100%;
     }
 
     .img-price {
